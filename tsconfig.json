@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",
+      "module": "esnext",
+      "target": "esnext",
+      "lib": ["WebWorker", "ESNext"],
+      "types": ["jest", "./node_modules/typescript/lib/lib.webworker", "./node_modules/typescript/lib/lib.esnext"],
+      "moduleResolution": "Node",
+      "alwaysStrict": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "declaration": true,
+    },
+    "include": [
+      "./src/**/*.ts",
+      "./test/**/*.ts",
+      "./node_modules/@cloudflare/workers-types/index.d.ts"
+    ],
+    "exclude": ["node_modules/", "dist/"]
+  }
+  

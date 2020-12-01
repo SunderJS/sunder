@@ -1,11 +1,11 @@
 import { isHttpError } from "http-errors";
 import { Context } from "../context";
 import { HttpStatus } from "../status";
-import { Handler } from "../router";
+import { MiddlewareNextFunction } from "../middleware";
 
-export async function renderErrorsAsJSON<P>(ctx: Context<P>, next: Handler<P>) {
+export async function renderErrorsAsJSON<P>(ctx: Context<P>, next: MiddlewareNextFunction) {
     try {
-        await next(ctx);
+        await next();
     } catch(err) {
         if (isHttpError(err)) {
             ctx.response.status = err.status; 

@@ -1,6 +1,6 @@
 import {Params, RouteOptions, Route, Router as TRRouter} from "tiny-request-router";
 import { Context } from "./context";
-import { MiddlewareNextFunction } from "./middleware";
+import { MiddlewareFunction, MiddlewareNextFunction } from "./middleware";
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS'
 export type MethodWildcard = 'ALL'
@@ -16,7 +16,7 @@ export type MethodWildcard = 'ALL'
  * }
  * ```
  */
-export type Handler<ParamsType = {}> = (ctx: Context<ParamsType>) => any | Promise<any>;
+export type Handler<ParamsType = {}> = ((ctx: Context<ParamsType>, next?: () => void) => any | Promise<any>);
 
 
 /**
@@ -96,13 +96,13 @@ export class Router {
 
     public async middleware(ctx: Context, next: MiddlewareNextFunction) {
         const match = this.match(ctx.request.method, ctx.url.pathname);
+
         if (match === null) {
             ctx.throw(404, "Not found");
             return;
         } else {
             ctx.params = match.params;
-            await match.handler(ctx);
+            await match.handler(ctx, next);
         }
-        await next();
     }
 }

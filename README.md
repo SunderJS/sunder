@@ -2,7 +2,7 @@
 
 **Sunder** is a minimal server-side framework for ServiceWorker based environments, intended for websites and APIs hosted on [Cloudflare Workers](https://workers.cloudflare.com/), but can be made to work in [Deno](https://deno.land) too.
 
-Think of it as Express or Koa for serverless - with types. It allows you to quickly build websites and APIs in a sane structure, and it's easy to write tests for.
+Think of it as Express or Koa for serverless - with types. It allows you to quickly build websites and APIs in a modern async structure (without callback hell). Also, it is easy to write tests for (which can be tricky for these kinds of environments).
 
 Technologies it pairs with especially well:
 
@@ -56,6 +56,8 @@ expect(app.respond).toBeTruthy();
 ## Inspiration
 
 This framework was inspired by Elixir's [plug](https://github.com/elixir-plug/plug), Node's [Koa](https://koajs.com/) framework, [tiny-request-router]() and [cfworker](https://github.com/cfworker/cfworker)'s web package.
+
+Sunder is only a few hundred lines of code. It has (nearly) no magic and doesn't impose too much structure. The API may still change a bit - don't expect it to be Fortune 500 production ready.
 
 ## License
 MIT

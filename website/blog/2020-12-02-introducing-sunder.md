@@ -64,3 +64,8 @@ Typescript recently released support for <a href="https://devblogs.microsoft.com
 
 > Note: You can use Sunder without Typescript too, but you will miss out on this type checking.
 
+## So can I use this?
+
+Yes, you can install Sunder now (`npm i sunder`) and use it in your projects. It is open source under the MIT license.
+
+It is however still a work in progress, things will change, and the docs are incomplete. The amount of available pre-written middleware is small. Contributions are of course welcome!

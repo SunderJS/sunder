@@ -3,8 +3,8 @@ const githubUrl = `https://github.com/gzuidhof/sunder`;
 module.exports = {
   title: 'Sunder',
   tagline: 'A minimal and unopinionated framework for Service Workers',
-  url: 'https://gzuidhof.github.io/sunder',
-  baseUrl: '/',
+  url: 'https://guido.io/Sunder',
+  baseUrl: '/Sunder/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

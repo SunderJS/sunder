@@ -1,11 +1,13 @@
 import { safeParse } from 'secure-json-parse';
+import { HeadersShorthands } from '../context';
+
 
 /**
  * Proxies a Request object such that the body parsing functions are consumable multiple
  * times by caching the result. It also parses JSON with protection against prototype poisoning.
  * @param request
  */
-export function proxyRequest(request: Request) {
+export function proxyRequest(request: Request): Request & HeadersShorthands  {
     let _arrayBuffer: Promise<ArrayBuffer> | undefined;
     let _formData: Promise<FormData> | undefined;
     let _json: Promise<any> | undefined;
@@ -33,11 +35,15 @@ export function proxyRequest(request: Request) {
                     return () => _text;
                 }
                 return () => _text = target.text();
+            } else if (property === "get") {
+                return target.headers.get;
+            }  else if (property === "set") {
+                return target.headers.set;
             }
 
             return Reflect.get(target, property, receiver);
         }
-    })
+    }) as Request & HeadersShorthands;
 }
 
 // export function assignState<V extends object, C extends Context>(ctx: C, value: V): C & {state: V} {

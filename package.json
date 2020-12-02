@@ -1,9 +1,9 @@
 {
     "name": "sunder",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Minimal server-side framework for service workers (such as Cloudflare Workers)",
     "scripts": {
-        "build": "rimraf dist && node build.js && tsc --emitDeclarationOnly",
+        "build": "rimraf dist && node build.js && tsc",
         "tsc": "tsc -p tsconfig.json",
         "test": "jest"
     },

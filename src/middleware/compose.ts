@@ -7,7 +7,7 @@
  *
  */
 import { Context } from "../context";
-import { MiddlewareFunction, MiddlewareNextFunction } from "../middleware";
+import { MiddlewareFunction, MiddlewareNextFunction } from "../middlewareTypes";
 
 export function composeMiddleware(middleware: MiddlewareFunction[]): MiddlewareFunction {
     if (!Array.isArray(middleware))
@@ -25,7 +25,7 @@ export function composeMiddleware(middleware: MiddlewareFunction[]): MiddlewareF
           throw new Error('next() called multiple times')
         lastCalledIndex = currentCallIndex
         let fn = middleware[currentCallIndex]
-        if (currentCallIndex === middleware.length) fn = next
+        if (currentCallIndex === middleware.length) fn = (next as any) // TODO fix this typing..
         if (!fn) return;
         try {
           return fn(context, dispatch.bind(null, currentCallIndex + 1));

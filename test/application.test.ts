@@ -12,7 +12,7 @@ describe("Application E2E examples", () => {
         // Example route with a named parameter
         router.get("/hello/:username", ({response, params}) => {
             response.body = `Hello ${params.username}`;
-            response.headers.set("content-type", "text/html");
+            response.set("content-type", "text/html");
         });
     
         // Example middleware
@@ -21,7 +21,7 @@ describe("Application E2E examples", () => {
             await next();
 
             const ms = Date.now() - start;
-            ctx.response.headers.set('X-Response-Time', `${ms}ms`);    
+            ctx.response.set('X-Response-Time', `${ms}ms`);    
         });
         app.use(router.middleware);
         

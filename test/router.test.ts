@@ -10,10 +10,9 @@ function createFetchEvent(request?: Request) {
 }
 
 describe("Router matching", () => {
-    test("Router matches", () => {
-        let wasTriggered = false;
+    test("Router matches", async () => {
         const myRoute = (ctx: Context) => {
-            wasTriggered = true;
+            ctx.response.set("my-header", "some-value");
         }
 
         const router = new Router();
@@ -24,8 +23,10 @@ describe("Router matching", () => {
 
         const match = router.match("GET", "/route");
         expect(match).toBeDefined();
-        match!.handler(new Context(createFetchEvent()));
-        expect(wasTriggered).toBeTruthy();
+
+        const ctx = new Context(createFetchEvent());
+        await match!.handler(ctx);
+        expect(ctx.response.headers.get("my-header")).toEqual("some-value")
     });
 
     test("Router middleware sets params", async () => {
@@ -40,9 +41,7 @@ describe("Router matching", () => {
         const req = new Request(`/post/${testId}`, {method: "GET"});
         const context = new Context(createFetchEvent(req));
 
-        await new Promise(resolve => {
-            router.middleware(context, async () => {resolve(undefined)});
-        })
+        await router.middleware(context)
     });
 
     test("Router middleware throws 404 http error on unknown route", async () => {
@@ -51,7 +50,7 @@ describe("Router matching", () => {
         const context = new Context(createFetchEvent(req));
 
         try{
-            await router.middleware(context, async () => {console.log("Noo")})
+            await router.middleware(context, async () => {fail("404 was still cascaded")})
             fail();
         } catch(e) {
             expect(isHttpError(e)).toBeTruthy();

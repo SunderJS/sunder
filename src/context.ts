@@ -6,6 +6,17 @@ import { createError } from "./util/error";
 export type ErrorProperties = object;
 export type Params = Record<string, string | undefined> | {};
 
+export type HeadersShorthands = {
+  /**
+   * Convenience shorthand for headers.get
+   */
+  get: typeof Headers.prototype.get,
+  /**
+   * Convenience shorthand for headers.set
+   */
+  set: typeof Headers.prototype.set;
+}
+
 export class Context<ParamsType = {} , StateType = any> {
 
   private readonly event: FetchEvent;
@@ -40,7 +51,7 @@ export class Context<ParamsType = {} , StateType = any> {
        * Utility function that sets the status to 302 and the `location` header to the passed value.
        */
       redirect: (url: string | URL, status: RedirectStatus) => void;
-  }
+  } & HeadersShorthands
 
   /**
    * The recommended namespace for passing information through middleware and to your frontend views.
@@ -57,7 +68,9 @@ export class Context<ParamsType = {} , StateType = any> {
           redirect: (url, status=HTTP.Found) => {      
             this.response.status = status; 
             this.response.headers.set('location', url instanceof URL ? url.href : url);
-          }
+          },
+          set: (name: string, value: string) => this.response.headers.set(name, value),
+          get: (name: string) => this.response.headers.get(name),
       }
       this.state = Object.create(null);
   }

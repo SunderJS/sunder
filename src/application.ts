@@ -1,6 +1,6 @@
 import { Context } from "./context";
 import { composeMiddleware } from "./middleware/compose";
-import { MiddlewareFunction } from "./middleware";
+import { MiddlewareFunction } from "./middlewareTypes";
 
 export class Sunder {
 

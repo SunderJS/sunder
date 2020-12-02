@@ -1,4 +1,4 @@
-import {Sunder, Router, Context} from "../src/index";
+import {Sunder, Router, Context} from "../lib/sunder";
 
 // there is no addEventListener in Node, so we create it here
 const addEventListener = (evt: string, listener: (e: FetchEvent) => void) => {};

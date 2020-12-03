@@ -1,6 +1,6 @@
 import { proxyRequest } from "./util/request";
 import { HttpStatus as HTTP, RedirectStatus } from "./status";
-import {assert} from "./util/assert";
+import { assert } from "./util/assert";
 import { createError } from "./util/error";
 import { ResponseData } from "./util/response";
 
@@ -11,7 +11,7 @@ export type HeadersShorthands = {
   /**
    * Convenience shorthand for headers.get
    */
-  get: typeof Headers.prototype.get,
+  get: typeof Headers.prototype.get;
   /**
    * Convenience shorthand for headers.set
    */
@@ -21,10 +21,9 @@ export type HeadersShorthands = {
    * Convenience shorthand for headers.has
    */
   has: typeof Headers.prototype.has;
-}
+};
 
-export class Context<ParamsType = {} , StateType = any> {
-
+export class Context<ParamsType = {}, StateType = any> {
   private readonly event: FetchEvent;
 
   public request: Request & HeadersShorthands;
@@ -56,18 +55,18 @@ export class Context<ParamsType = {} , StateType = any> {
   public state: StateType;
 
   constructor(event: FetchEvent) {
-      this.event = event;
-      this.request = proxyRequest(event.request);
-      this.url = new URL(this.request.url);
-      this.response = new ResponseData();
-      this.state = Object.create(null);
+    this.event = event;
+    this.request = proxyRequest(event.request);
+    this.url = new URL(this.request.url);
+    this.response = new ResponseData();
+    this.state = Object.create(null);
   }
 
   public waitUntil(promise: Promise<any>) {
     this.event.waitUntil(promise);
   }
 
-   /**
+  /**
    * Throw an error with `status` (default 500) and
    * `msg`. Note that these are user-level
    * errors, and the message may be exposed to the client.
@@ -84,7 +83,11 @@ export class Context<ParamsType = {} , StateType = any> {
    * See: https://github.com/jshttp/http-errors
    */
 
-  public throw(statusOrError: HTTP | string |  Error, message?: string | Error, props?: object) {
+  public throw(
+    statusOrError: HTTP | string | Error,
+    message?: string | Error,
+    props?: object,
+  ) {
     throw createError(statusOrError, message, props);
   }
 
@@ -103,4 +106,5 @@ export class Context<ParamsType = {} , StateType = any> {
 /**
  * Drop in replacement for `Context` that is strict when it comes to state (defaulting to an empty state instead of `any`).
  */
-export class StrictContext<ParamsType = {}, StateType = {}> extends Context<ParamsType, StateType> {}
+export class StrictContext<ParamsType = {}, StateType = {}>
+  extends Context<ParamsType, StateType> {}

@@ -378,4 +378,13 @@ export enum HttpStatus {
   NetworkAuthenticationRequired = 511,
 }
 
-export type RedirectStatus = HttpStatus.MultipleChoices | HttpStatus.MovedPermanently | HttpStatus.Found | HttpStatus.SeeOther | HttpStatus.NotModified | HttpStatus.UseProxy | HttpStatus.SwitchProxy | HttpStatus.TemporaryRedirect | HttpStatus.PermanentRedirect
+export type RedirectStatus =
+  | HttpStatus.MultipleChoices
+  | HttpStatus.MovedPermanently
+  | HttpStatus.Found
+  | HttpStatus.SeeOther
+  | HttpStatus.NotModified
+  | HttpStatus.UseProxy
+  | HttpStatus.SwitchProxy
+  | HttpStatus.TemporaryRedirect
+  | HttpStatus.PermanentRedirect;

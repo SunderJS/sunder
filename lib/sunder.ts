@@ -4,3 +4,5 @@ export { HttpStatus } from "./status";
 
 // Middlewares
 export { Router } from "./middleware/router";
+export { apply } from "./middleware/apply";
+export { compose } from "./middleware/compose";

@@ -1,5 +1,7 @@
-// @ts-ignore
-import {Context} from "./context.ts";
+import { Context } from "./context";
 
 export type MiddlewareNextFunction = () => (Promise<any> | any);
-export type MiddlewareFunction<ParamsType=any> = (ctx: Context<ParamsType>, next: MiddlewareNextFunction) => Promise<any>;
+export type Middleware<ParamsType = any> = (
+  ctx: Context<ParamsType>,
+  next: MiddlewareNextFunction,
+) => Promise<any>;

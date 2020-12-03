@@ -1,8 +1,5 @@
 import {Sunder, Router, Context} from "../lib/sunder";
-import { getResponseTo } from "./helpers";
-
-// there is no addEventListener in Node, so we create it here
-const addEventListener = (evt: string, listener: (e: FetchEvent) => void) => {};
+import { getResponse } from "../lib/util/testing";
 
 describe("Application E2E examples", () => {
     test("Example in README", async () => {
@@ -23,15 +20,11 @@ describe("Application E2E examples", () => {
             ctx.response.set('X-Response-Time', `${ms}ms`);    
         });
         app.use(router.middleware);
-        
-        addEventListener('fetch', (event) => {
-            app.handleEvent(event);
-        });
 
         // TODO add actual tests
         expect(app.respond).toBeTruthy();
         
-        const resp = await getResponseTo(new Request("/hello/mia"), app);
+        const resp = await getResponse(app, "/hello/mia");
         expect(resp.headers.has("x-response-time")).toBeTruthy();
         expect(await resp.text()).toEqual("Hello mia");
         expect(resp.headers.get("content-type")).toEqual("text/plain;charset=UTF-8");

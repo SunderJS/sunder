@@ -5,7 +5,7 @@
 
 **Sunder** is a minimal server-side framework for ServiceWorker environments. It is intended for websites and APIs built on [Cloudflare Workers](https://workers.cloudflare.com/).
 
-Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure. It is easy to write tests for.
+Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure. Also important: it is easy to write tests for.
 
 <!-- Technologies it pairs with especially well:
 
@@ -17,7 +17,7 @@ Think of it as Express or Koa for serverless which allows you to quickly build w
 All four of these are optional in your own project. -->
 
 ## Documentation
-Read the documentation [**here**](https://gzuidhof.github.io/Sunder/docs).
+Read the documentation [**here**](https://gzuidhof.github.io/Sunder/docs), or check out the introductory blog post [here](https://gzuidhof.github.io/Sunder/blog).
 
 ## Installation
 ```bash

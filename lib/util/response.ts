@@ -39,7 +39,7 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
   private _implicitType = false;
   private _stringifyBody = false;
   private _body: ExtendedBodyInit;
-  
+
   get body() {
     return this._body;
   }
@@ -48,9 +48,9 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
 
     // no content
     if (value === undefined) {
-      this.headers.delete('content-type');
-      this.headers.delete('content-length');
-      this.headers.delete('transfer-encoding');
+      this.headers.delete("content-type");
+      this.headers.delete("content-length");
+      this.headers.delete("transfer-encoding");
       return;
     }
 
@@ -70,22 +70,22 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
       this._stringifyBody = false;
       if (this._implicitType) {
         this._implicitType = false;
-        this.headers.delete('content-type');
+        this.headers.delete("content-type");
       }
-    } else if (typeof value === 'string') {
+    } else if (typeof value === "string") {
       this._stringifyBody = false;
-      if (!this.headers.has('content-type') || this._implicitType) {
+      if (!this.headers.has("content-type") || this._implicitType) {
         this._implicitType = true;
         if (/^\s*</.test(value)) {
-          this.headers.set('content-type', 'text/html;charset=UTF-8');
+          this.headers.set("content-type", "text/html;charset=UTF-8");
         } else {
-          this.headers.set('content-type', 'text/plain;charset=UTF-8');
+          this.headers.set("content-type", "text/plain;charset=UTF-8");
         }
       }
     } else {
       this._stringifyBody = true;
       this._implicitType = true;
-      this.headers.set('content-type', 'application/json;charset=UTF-8');
+      this.headers.set("content-type", "application/json;charset=UTF-8");
     }
   }
 
@@ -98,12 +98,12 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
   }
 
   has(name: string) {
-    return this.headers.has(name)
+    return this.headers.has(name);
   }
 
   redirect(url: string | URL, status: RedirectStatus = HttpStatus.Found) {
-    this.status = status; 
-    this.headers.set('location', url instanceof URL ? url.href : url);
+    this.status = status;
+    this.headers.set("location", url instanceof URL ? url.href : url);
   }
 
   createResponse() {

@@ -1,6 +1,8 @@
-# sunder
+# Sunder
+[![NPM badge](https://img.shields.io/npm/v/sunder)](https://www.npmjs.com/package/sunder)
+[![Documentation](https://img.shields.io/badge/Read%20the-documentation-1abc9c.svg)](https://gzuidhof.github.io/Sunder/docs)
 
-**sunder** is a minimal server-side framework for ServiceWorker environments. It is intended for websites and APIs built on [Cloudflare Workers](https://workers.cloudflare.com/).
+**Sunder** is a minimal server-side framework for ServiceWorker environments. It is intended for websites and APIs built on [Cloudflare Workers](https://workers.cloudflare.com/).
 
 Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure. It is easy to write tests for.
 
@@ -14,7 +16,7 @@ Technologies it pairs with especially well:
 All four of these are optional in your own project - but recommended!
 
 ## Documentation
-Read the documentation [**here**](https://gzuidhof.github.io/sunder/docs).
+Read the documentation [**here**](https://gzuidhof.github.io/Sunder/docs).
 
 ## Installation
 ```

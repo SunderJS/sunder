@@ -1,4 +1,5 @@
 # Sunder
+![CI](https://github.com/gzuidhof/Sunder/workflows/CI/badge.svg)
 [![NPM badge](https://img.shields.io/npm/v/sunder)](https://www.npmjs.com/package/sunder)
 [![Documentation](https://img.shields.io/badge/Read%20the-documentation-1abc9c.svg)](https://gzuidhof.github.io/Sunder/docs)
 

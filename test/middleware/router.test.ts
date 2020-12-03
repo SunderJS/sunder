@@ -1,5 +1,5 @@
 import { isHttpError } from "http-errors";
-import { Context, Router } from "../lib/sunder";
+import { Context, Router } from "../../lib/sunder";
 
 function createFetchEvent(request?: Request) {
     if (request === undefined) {

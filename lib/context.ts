@@ -1,7 +1,8 @@
-import { proxyRequest } from "./util/requestProxy";
+import { proxyRequest } from "./util/request";
 import { HttpStatus as HTTP, RedirectStatus } from "./status";
 import {assert} from "./util/assert";
 import { createError } from "./util/error";
+import { ResponseData } from "./util/response";
 
 export type ErrorProperties = object;
 export type Params = Record<string, string | undefined> | {};
@@ -15,13 +16,18 @@ export type HeadersShorthands = {
    * Convenience shorthand for headers.set
    */
   set: typeof Headers.prototype.set;
+
+  /**
+   * Convenience shorthand for headers.has
+   */
+  has: typeof Headers.prototype.has;
 }
 
 export class Context<ParamsType = {} , StateType = any> {
 
   private readonly event: FetchEvent;
 
-  public request: Request;
+  public request: Request & HeadersShorthands;
   public url: URL;
 
   /**
@@ -40,18 +46,9 @@ export class Context<ParamsType = {} , StateType = any> {
   public params!: ParamsType;
 
   /**
-   * The response init, from its fields the final `Response` is constructed.
+   * The response data, from its fields the final `Response` is constructed.
    */
-  public response: {
-      body?: BodyInit;
-      headers: Headers,
-      status?: number;
-      statusText?: string;
-      /**
-       * Utility function that sets the status to 302 and the `location` header to the passed value.
-       */
-      redirect: (url: string | URL, status: RedirectStatus) => void;
-  } & HeadersShorthands
+  public response: ResponseData;
 
   /**
    * The recommended namespace for passing information through middleware and to your frontend views.
@@ -62,16 +59,7 @@ export class Context<ParamsType = {} , StateType = any> {
       this.event = event;
       this.request = proxyRequest(event.request);
       this.url = new URL(this.request.url);
-      this.response = {
-          body: undefined,
-          headers: new Headers({}),
-          redirect: (url, status=HTTP.Found) => {      
-            this.response.status = status; 
-            this.response.headers.set('location', url instanceof URL ? url.href : url);
-          },
-          set: (name: string, value: string) => this.response.headers.set(name, value),
-          get: (name: string) => this.response.headers.get(name),
-      }
+      this.response = new ResponseData();
       this.state = Object.create(null);
   }
 
@@ -107,7 +95,7 @@ export class Context<ParamsType = {} , StateType = any> {
    * This field is then used to construct a Response and it is sent using `event.respondWith`.
    */
   public respond() {
-    const r = new Response(this.response.body, this.response);
+    const r = this.response.createResponse();
     this.event.respondWith(r);
   }
 }
@@ -115,6 +103,4 @@ export class Context<ParamsType = {} , StateType = any> {
 /**
  * Drop in replacement for `Context` that is strict when it comes to state (defaulting to an empty state instead of `any`).
  */
-export class StrictContext<ParamsType = {}, StateType = {}> extends Context<ParamsType, StateType> {
-  
-}
+export class StrictContext<ParamsType = {}, StateType = {}> extends Context<ParamsType, StateType> {}

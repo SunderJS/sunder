@@ -1,7 +1,6 @@
 /**
  * Compose an array of `middleware` returning
- * a fully valid middleware comprised
- * of all those which are passed.
+ * a fully valid middleware comprised of all those which are passed.
  * 
  * Based on the code in the MIT licensed `koa-compose` package.
  *

@@ -12,10 +12,6 @@ export class Sunder {
 
     private middleware: MiddlewareFunction<any>[] = [];
 
-    constructor() {
-
-    }
-
     public async handleEvent(event: FetchEvent) {
         const ctx = new Context(event);
         const middleware = composeMiddleware(this.middleware);

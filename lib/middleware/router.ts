@@ -1,6 +1,6 @@
 import {Params, RouteOptions, Route, Router as TRRouter} from "tiny-request-router";
 import { Context } from "../context";
-import { MiddlewareFunction, MiddlewareNextFunction } from "../middlewareTypes";
+import { MiddlewareNextFunction } from "../middlewareTypes";
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS'
 export type MethodWildcard = 'ALL'
@@ -48,7 +48,7 @@ export class Router {
     /**
      * The wrapped tiny-request-router Router.
      */
-    public internalRouter: TRRouter;
+    public readonly internalRouter: TRRouter;
 
     constructor() {
         this.internalRouter = new TRRouter<Handler<Partial<Params>>>();
@@ -94,7 +94,7 @@ export class Router {
         return match;
     }
 
-    public async middleware(ctx: Context, next: MiddlewareNextFunction = ()=>undefined) {
+    public readonly middleware = async (ctx: Context, next: MiddlewareNextFunction = ()=>undefined) => {
         const match = this.match(ctx.request.method, ctx.url.pathname);
 
         if (match === null) {

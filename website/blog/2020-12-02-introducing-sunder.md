@@ -25,7 +25,6 @@ const router = new Router();
 // Example route with a named parameter
 router.get("/hello/:username", ({response, params}) => {
     response.body = `Hello ${params.username}`;
-    response.headers.set("content-type", "text/plain");
 });
 
 app.use(router.middleware);
@@ -48,7 +47,7 @@ async function responseTimeMiddleware(ctx, next) {
     const start = Date.now();
     await next();
     const ms = Date.now() - start;
-    ctx.response.headers.set('X-Response-Time', `${ms}ms`);    
+    ctx.response.set('X-Response-Time', `${ms}ms`);    
 }
 ```
 

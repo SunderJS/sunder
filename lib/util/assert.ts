@@ -47,7 +47,7 @@ assertFunc.notEqual = function (
  */
 assertFunc.ok = function (
   value: any,
-  status: HTTP,
+  status: HTTP = HTTP.InternalServerError,
   msg?: string,
   opts?: ErrorProperties,
 ) {
@@ -86,7 +86,7 @@ assertFunc.notStrictEqual = function (
 assertFunc.deepEqual = function (
   a: any,
   b: any,
-  status: HTTP,
+  status: HTTP = HTTP.InternalServerError,
   msg?: string,
   opts?: ErrorProperties,
 ) {
@@ -99,7 +99,7 @@ assertFunc.deepEqual = function (
 assertFunc.notDeepEqual = function (
   a: any,
   b: any,
-  status: HTTP,
+  status: HTTP = HTTP.InternalServerError,
   msg?: string,
   opts?: ErrorProperties,
 ) {

@@ -15,6 +15,8 @@ export class Sunder {
    * Handles given FetchEvent, automatically responding. Note that this function catches errors and delegates them to the `this.onerror` function.
    * 
    * You can disable automatic responding by setting `this.respond` to false.
+   * 
+   * For convenience this returns the response, which is useful for testing the app end-to-end.
    */
   public async handleEvent(event: FetchEvent) {
     const ctx = new Context(event);
@@ -24,7 +26,9 @@ export class Sunder {
       this.onerror(e);
     }
     if (this.respond) {
-      ctx.respond();
+      return ctx.respond();
+    } else {
+      return ctx.response.createResponse();
     }
   }
 

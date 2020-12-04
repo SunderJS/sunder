@@ -2,7 +2,6 @@ import { apply, Context } from "../../lib";
 import { renderErrorsAsJSON } from "../../lib/middleware/render";
 import { createEmptyContext } from "../helpers";
 
-
 describe("Render errors as JSON middleware", () => {
     test("Emits JSON error with correct status and message", async () => {
         const sadRoute = async (ctx: Context) => {
@@ -20,5 +19,4 @@ describe("Render errors as JSON middleware", () => {
         expect(resp.status).toEqual(400);
         expect(await resp.json()).toEqual({message: ":( sad"});
     })
-
 })

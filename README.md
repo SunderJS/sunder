@@ -1,4 +1,3 @@
-# Sunder
 [![CI](https://github.com/gzuidhof/Sunder/workflows/CI/badge.svg)](https://github.com/gzuidhof/Sunder/actions)
 [![NPM badge](https://img.shields.io/npm/v/sunder)](https://www.npmjs.com/package/sunder)
 [![Documentation](https://img.shields.io/badge/Read%20the-documentation-1abc9c.svg)](https://gzuidhof.github.io/Sunder/docs)
@@ -45,7 +44,7 @@ app.use(async (ctx, next) => {
     await next();
 
     const ms = Date.now() - start;
-    ctx.response.headers.set('X-Response-Time', `${ms}ms`);    
+    ctx.response.set('X-Response-Time', `${ms}ms`);    
 });
 app.use(router.middleware);
 

@@ -37,7 +37,6 @@ const router = new Router();
 // Example route with a named parameter
 router.get("/hello/:username", ({response, params}) => {
     response.body = `Hello ${params.username}`;
-    response.headers.set("content-type", "text/plain");
 });
 
 // Example middleware

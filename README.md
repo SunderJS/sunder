@@ -49,7 +49,7 @@ app.use(async (ctx, next) => {
 app.use(router.middleware);
 
 addEventListener('fetch', (event) => {
-    app.handleEvent(event);
+    event.respondWith(app.respondTo(event));
 });
 ```
 

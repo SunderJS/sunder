@@ -17,7 +17,7 @@ app.use(async ({response}) => {
 });
 
 addEventListener('fetch', (event) => {
-    app.handleEvent(event);
+    event.respondWith(app.respondTo(event));
 });
 ```
 

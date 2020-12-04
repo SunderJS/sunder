@@ -12,8 +12,9 @@ describe("Render errors as JSON middleware", () => {
         try {
             await apply([renderErrorsAsJSON, sadRoute], ctx);
             fail(); // Should have thrown the line before.
-
-        } catch (e) {/* Ignore error */};
+        } catch (e) {
+            /* Ignore error */
+        };
         const resp = ctx.response.createResponse();
 
         expect(resp.status).toEqual(400);

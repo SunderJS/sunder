@@ -11,13 +11,5 @@ export function getResponse(
 ) {
   const request = new Request(url, requestData);
   const event = new FetchEvent("fetch", { request: request });
-
-  const resp = new Promise((resolve) => {
-    event.respondWith = ((r) => {
-      resolve(r);
-    });
-  });
-
-  app.handleEvent(event);
-  return resp as Promise<Response>;
+  return app.respondTo(event);
 }

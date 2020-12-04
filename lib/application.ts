@@ -4,10 +4,6 @@ import { Middleware } from "./middlewareTypes";
 
 export class Sunder {
     public silent = false;
-    /**
-       * Whether the handleEvent method should automatically respond.
-       */
-    public respond = true;
 
     private middleware: Middleware<any>[] = [];
 

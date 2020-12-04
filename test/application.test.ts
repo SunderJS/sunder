@@ -21,9 +21,6 @@ describe("Application E2E examples", () => {
     });
     app.use(router.middleware);
 
-    // TODO add actual tests
-    expect(app.respond).toBeTruthy();
-
     const resp = await getResponse(app, "/hello/mia");
     expect(resp.headers.has("x-response-time")).toBeTruthy();
     expect(await resp.text()).toEqual("Hello mia");

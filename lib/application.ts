@@ -11,6 +11,11 @@ export class Sunder {
 
   private middleware: Middleware<any>[] = [];
 
+  /**
+   * Handles given FetchEvent, automatically responding. Note that this function catches errors and delegates them to the `this.onerror` function.
+   * 
+   * You can disable automatic responding by setting `this.respond` to false.
+   */
   public async handleEvent(event: FetchEvent) {
     const ctx = new Context(event);
     try {
@@ -23,6 +28,10 @@ export class Sunder {
     }
   }
 
+  /**
+   * Registers a middleware function, note that the order matters!
+   * @param fn
+   */
   use<P = object>(fn: Middleware<P>) {
     if (typeof fn !== "function") {
       throw new TypeError("middleware must be a function!");

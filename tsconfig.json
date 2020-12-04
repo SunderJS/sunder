@@ -7,6 +7,7 @@
       "types": ["jest", "types-cloudflare-worker/global"],
       "moduleResolution": "node",
       "alwaysStrict": true,
+      "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
       "strict": true,
       "preserveConstEnums": true,

@@ -1,7 +1,7 @@
 import { ErrorProperties } from "../context";
 import { HttpStatus as HTTP } from "../status";
 
-import * as eql from "fast-deep-equal/es6";
+import eql from "fast-deep-equal/es6";
 import { createError } from "./error";
 
 /* Based on https://github.com/jshttp/http-assert */

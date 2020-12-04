@@ -10,7 +10,7 @@ export class Sunder {
     /**
      * Handles given FetchEvent and returns a promise of the response. Note that this function catches errors and delegates them to the `this.onerror` function.
      */
-    async respondTo(event: FetchEvent) {
+    async handle(event: FetchEvent) {
         const ctx = new Context(event);
         try {
             await apply(this.middleware, ctx);

@@ -11,5 +11,5 @@ export function getResponse(
 ) {
   const request = new Request(url, requestData);
   const event = new FetchEvent("fetch", { request: request });
-  return app.respondTo(event);
+  return app.handle(event);
 }

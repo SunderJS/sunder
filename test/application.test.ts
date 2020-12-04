@@ -1,4 +1,4 @@
-import { Context, Router, Sunder } from "../lib/sunder";
+import { Context, Router, Sunder } from "../lib";
 import { getResponse } from "../lib/util/testing";
 
 describe("Application E2E examples", () => {

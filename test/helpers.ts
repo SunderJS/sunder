@@ -1,5 +1,5 @@
 import { Middleware } from "../lib/middlewareTypes";
-import { apply, Context } from "../lib/sunder";
+import { apply, Context } from "../lib";
 
 export function createEmptyFetchEvent() {
     return new FetchEvent("fetch", {request: new Request("/")});

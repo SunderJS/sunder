@@ -1,6 +1,6 @@
 import { HttpError } from "http-errors";
-import { Context, HttpStatus } from "../../lib/sunder";
-import { applyOnEmptyContext } from "../util";
+import { Context, HttpStatus } from "../../lib";
+import { applyOnEmptyContext } from "../helpers";
 
 describe("Assert on Context", () => {
   test("Basic truthiness assertions", async () => {

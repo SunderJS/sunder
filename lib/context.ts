@@ -96,10 +96,13 @@ export class Context<ParamsType = {}, StateType = any> {
   /**
    * To be called at the end when `this.response` field is all done.
    * This field is then used to construct a Response and it is sent using `event.respondWith`.
+   * 
+   * For convenience this returns the response.
    */
   public respond() {
     const r = this.response.createResponse();
     this.event.respondWith(r);
+    return r;
   }
 }
 

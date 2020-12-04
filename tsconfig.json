@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-      "outDir": "./dist",
+      "outDir": "./build",
       "module": "esnext",
       "target": "esnext",
       "lib": ["WebWorker", "ESNext"],
-      "types": ["jest", "./node_modules/typescript/lib/lib.webworker", "./node_modules/typescript/lib/lib.esnext"],
-      "moduleResolution": "Node",
+      "types": ["jest", "types-cloudflare-worker/global"],
+      "moduleResolution": "node",
       "alwaysStrict": true,
       "forceConsistentCasingInFileNames": true,
       "strict": true,
@@ -16,8 +16,8 @@
     "include": [
       "./lib/**/*.ts",
       "./test/**/*.ts",
-      "./node_modules/@cloudflare/workers-types/index.d.ts"
+      "./node_modules/types-cloudflare-worker/global.d.ts",
     ],
-    "exclude": ["node_modules/", "dist/"]
+    "exclude": ["node_modules/", "build/"]
   }
   

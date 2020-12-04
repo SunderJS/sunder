@@ -1,6 +1,6 @@
 {
     "name": "sunder",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "license": "MIT",
     "author": "Guido Zuidhof <me@guido.io>",
     "funding": {
@@ -13,16 +13,16 @@
     },
     "description": "Minimal server-side framework for service workers (such as Cloudflare Workers)",
     "scripts": {
-        "build": "rimraf dist && node build.js && tsc && rm -rf dist/test",
+        "build": "rimraf dist && tsc",
         "tsc": "tsc",
         "test": "jest",
-        "prepublishOnly": "npm i && npm t && npm run build"
+        "dist": "npm i && npm t && npm run build && cp package.json build/lib/ && cp README.md build/lib/ && cd build/lib && npm publish --ignore-scripts",
+        "prepublishOnly": "echo \"Error: Don't run 'npm publish' in root. Use 'npm run dist' instead.\" && exit 1"
     },
-    "main": "dist/sunder.bundle.js",
-    "module": "dist/lib/sunder.js",
-    "types": "dist/lib/sunder.d.ts",
+    "main": "index.js",
+    "module": "index.js",
+    "types": "index.d.ts",
     "devDependencies": {
-        "@cloudflare/workers-types": "^2.1.0",
         "@peculiar/webcrypto": "^1.1.4",
         "@types/http-errors": "^1.8.0",
         "@types/node": "^14.14.10",
@@ -30,8 +30,7 @@
         "@types/secure-json-parse": "^1.0.2",
         "@udacity/types-service-worker-mock": "^1.2.0",
         "cloudflare-worker-mock": "^1.2.0",
-        "esbuild": "^0.8.12",
-        "estrella": "^1.2.10",
+        "fetch-readablestream": "^0.2.0",
         "formdata-node": "^2.4.0",
         "jest": "^26.6.3",
         "node-fetch": "^2.6.1",

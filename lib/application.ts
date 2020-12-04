@@ -8,11 +8,7 @@ export class Sunder {
     private middleware: Middleware<any>[] = [];
 
     /**
-     * Handles given FetchEvent, automatically responding. Note that this function catches errors and delegates them to the `this.onerror` function.
-     * 
-     * You can disable automatic responding by setting `this.respond` to false.
-     * 
-     * For convenience this returns the response, which is useful for testing the app end-to-end.
+     * Handles given FetchEvent and returns a promise of the response. Note that this function catches errors and delegates them to the `this.onerror` function.
      */
     async respondTo(event: FetchEvent) {
         const ctx = new Context(event);

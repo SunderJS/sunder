@@ -20,16 +20,19 @@ export class Sunder {
    */
   public async handleEvent(event: FetchEvent) {
     const ctx = new Context(event);
-    try {
-      await apply(this.middleware, ctx);
-    } catch (e) {
-      this.onerror(e);
-    }
+    const p = new Promise(async resolve => {
+      try {
+        await apply(this.middleware, ctx);
+      } catch (e) {
+        this.onerror(e);
+      }
+      resolve(ctx.response.createResponse());
+    }) as Promise<Response>;
+
     if (this.respond) {
-      return ctx.respond();
-    } else {
-      return ctx.response.createResponse();
+      event.respondWith(p);
     }
+    return p;
   }
 
   /**

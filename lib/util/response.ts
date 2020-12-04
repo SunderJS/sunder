@@ -101,11 +101,19 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
     return this.headers.has(name);
   }
 
+  /**
+   * Sets the headers to a redirect header (`location`) with given status.
+   * @param url 
+   * @param status Status of redirect, default to Status Found (302).
+   */
   redirect(url: string | URL, status: RedirectStatus = HttpStatus.Found) {
     this.status = status;
     this.headers.set("location", url instanceof URL ? url.href : url);
   }
 
+  /**
+   * Create a native Response object, which is what FetchEvent expects.
+   */
   createResponse() {
     const { body: rawBody, status, statusText, headers } = this;
     const body = this._stringifyBody

@@ -92,20 +92,6 @@ export class Context<ParamsType = {}, StateType = any> {
   }
 
   public assert = assert;
-
-  /**
-   * To be called at the end when `this.response` field is all done.
-   * This field is then used to construct a Response and it is sent using `event.respondWith`.
-   * 
-   * Usually you would **not** call this yourself and let the Sunder top level app handle it instead.
-   * 
-   * For convenience this returns the response.
-   */
-  public respond() {
-    const r = this.response.createResponse();
-    this.event.respondWith(r);
-    return r;
-  }
 }
 
 /**

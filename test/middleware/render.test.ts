@@ -14,7 +14,7 @@ describe("Render errors as JSON middleware", () => {
             fail(); // Should have thrown the line before.
 
         } catch (e) {/* Ignore error */};
-        const resp = ctx.respond();
+        const resp = ctx.response.createResponse();
 
         expect(resp.status).toEqual(400);
         expect(await resp.json()).toEqual({message: ":( sad"});

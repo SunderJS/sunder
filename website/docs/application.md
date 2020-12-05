@@ -8,7 +8,7 @@ A Sunder application is an object containing an array of middleware functions wh
 The obligatory hello world application:
 
 ```typescript
-import {Sunder} from "sunder
+import {Sunder} from "sunder"
 
 const app = new Sunder();
 
@@ -17,7 +17,8 @@ app.use(async ({response}) => {
 });
 
 addEventListener('fetch', (event) => {
-    event.respondWith(app.respondTo(event));
+  const fe = event as FetchEvent; // Only required in Typescript
+  fe.respondWith(app.handle(fe));
 });
 ```
 

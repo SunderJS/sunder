@@ -30,7 +30,7 @@ router.get("/hello/:username", ({response, params}) => {
 app.use(router.middleware);
 
 addEventListener('fetch', (event) => {
-    const resp = app.respondTo(event);
+    const resp = app.handle(event);
     event.respondWith(resp);
 });
 ```

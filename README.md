@@ -49,7 +49,8 @@ app.use(async (ctx, next) => {
 app.use(router.middleware);
 
 addEventListener('fetch', (event) => {
-    event.respondWith(app.respondTo(event));
+  const fe = event as FetchEvent; // Only required in Typescript
+  fe.respondWith(app.handle(fe));
 });
 ```
 

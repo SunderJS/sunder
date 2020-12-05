@@ -45,7 +45,7 @@ export function proxyRequest(request: Request): Request & HeadersShorthands {
         return target.headers.set;
       }
 
-      return Reflect.get(target, property, receiver);
+      return (target as any)[property];
     },
   }) as Request & HeadersShorthands;
 }

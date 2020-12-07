@@ -16,7 +16,7 @@ Think of it as Express or Koa for serverless which allows you to quickly build w
 All four of these are optional in your own project. -->
 
 ## Documentation
-Read the documentation [**here**](https://gzuidhof.github.io/Sunder/docs), or check out the introductory blog post [here](https://gzuidhof.github.io/Sunder/blog).
+Read the documentation [**here**](https://sunderjs.com/docs), or check out the introductory blog post [here](https://sunderjs.com/blog).
 
 ## Installation
 ```bash

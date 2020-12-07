@@ -6,3 +6,5 @@ export { HttpStatus } from "./status";
 export { Router } from "./middleware/router";
 export { apply } from "./middleware/apply";
 export { compose } from "./middleware/compose";
+
+export {Middleware, MiddlewareNextFunction} from "./middlewareTypes";

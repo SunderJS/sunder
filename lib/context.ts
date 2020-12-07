@@ -1,5 +1,5 @@
 import { proxyRequest } from "./util/request";
-import { HttpStatus as HTTP, RedirectStatus } from "./status";
+import { HttpStatus as HTTP } from "./status";
 import { assert } from "./util/assert";
 import { createError } from "./util/error";
 import { ResponseData } from "./util/response";
@@ -24,7 +24,7 @@ export type HeadersShorthands = {
 };
 
 export class Context<ParamsType = {}, StateType = any> {
-  private readonly event: FetchEvent;
+  public readonly event: FetchEvent;
 
   public request: Request & HeadersShorthands;
   public url: URL;

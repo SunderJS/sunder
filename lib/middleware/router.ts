@@ -5,7 +5,7 @@ import {
   Router as TRRouter,
 } from "tiny-request-router";
 import { Context } from "../context";
-import { MiddlewareNextFunction } from "../middlewareTypes";
+import { Middleware, MiddlewareNextFunction, SyncMiddleware } from "../middlewareTypes";
 
 export type Method =
   | "GET"
@@ -28,10 +28,8 @@ export type MethodWildcard = "ALL";
  * }
  * ```
  */
-export type Handler<ParamsType = {}> = ((
-  ctx: Context<ParamsType>,
-  next?: () => void,
-) => any | Promise<any>);
+export type Handler<ParamsType = {}> = Middleware<ParamsType> | SyncMiddleware<ParamsType>;
+// ((ctx: Context<ParamsType>) => any | Promise<any>) | Middleware<ParamsType>;
 
 /**
  * A stronger-typed version of `RouteMatch` in tiny-request-router

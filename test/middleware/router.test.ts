@@ -24,7 +24,7 @@ describe("Router matching", () => {
     expect(match).toBeDefined();
 
     const ctx = new Context(createFetchEvent());
-    await match!.handler(ctx);
+    await match!.handler(ctx, () => undefined);
     expect(ctx.response.headers.get("my-header")).toEqual("some-value");
   });
 

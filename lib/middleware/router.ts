@@ -77,7 +77,7 @@ export class Router {
   }
 
   public post<S extends string>(
-    path: string,
+    path: S,
     handler: Handler<PathParams<S>>,
     opts?: RouteOptions,
   ) {
@@ -86,7 +86,7 @@ export class Router {
   }
 
   public head<S extends string>(
-    path: string,
+    path: S,
     handler: Handler<PathParams<S>>,
     opts?: RouteOptions,
   ) {
@@ -95,7 +95,7 @@ export class Router {
   }
 
   public patch<S extends string>(
-    path: string,
+    path: S,
     handler: Handler<PathParams<S>>,
     opts?: RouteOptions,
   ) {
@@ -104,7 +104,7 @@ export class Router {
   }
 
   public put<S extends string>(
-    path: string,
+    path: S,
     handler: Handler<PathParams<S>>,
     opts?: RouteOptions,
   ) {
@@ -113,7 +113,7 @@ export class Router {
   }
 
   public all<S extends string>(
-    path: string,
+    path: S,
     handler: Handler<PathParams<S>>,
     opts?: RouteOptions,
   ) {
@@ -122,7 +122,7 @@ export class Router {
   }
 
   public delete<S extends string>(
-    path: string,
+    path: S,
     handler: Handler<PathParams<S>>,
     opts?: RouteOptions,
   ) {

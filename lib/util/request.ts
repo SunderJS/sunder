@@ -38,11 +38,11 @@ export function proxyRequest(request: Request): Request & HeadersShorthands {
 
         // Convenience shorthands
       } else if (property === "get") {
-        return target.headers.get;
+        return (name: string) => target.headers.get(name);
       } else if (property === "set") {
-        return target.headers.set;
+        return (name: string, value: string) => target.headers.set(name, value);
       } else if (property === "has") {
-        return target.headers.set;
+        return (name: string) => target.headers.has(name);
       }
 
       return (target as any)[property];

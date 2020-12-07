@@ -42,6 +42,7 @@ export type RouteHandlerMatch<S extends string> = {
 export type SplitRoute<S extends string> = string extends S ? string[]
   : S extends `${infer Start}/:${infer Param}/${infer Rest}`
     ? [Param, ...SplitRoute<Rest>]
+  : S extends `${infer Start}/:${infer Param}+` ? [Param]
   : S extends `${infer Start}/:${infer Param}` ? [Param]
   : [];
 

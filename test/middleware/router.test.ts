@@ -58,4 +58,19 @@ describe("Router matching", () => {
       expect(e.status).toEqual(404);
     }
   });
+
+  test("Understands /:name+ routes", async () => {
+    const testPath = "abc/def";
+    const r = (ctx: Context<{ path: string }>) => {
+      expect(ctx.params.path).toEqual(testPath);
+    };
+
+    const router = new Router();
+    router.get("/post/:path+", r);
+
+    const req = new Request(`/post/${testPath}`, { method: "GET" });
+    const context = new Context(createFetchEvent(req));
+
+    await router.middleware(context);
+  });
 });

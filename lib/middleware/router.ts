@@ -21,6 +21,8 @@ export type MethodWildcard = "ALL";
  * A handler function just takes a context, you have to type the generic <Params> to use params 
  * in your Handler in a type-checked manner.
  * 
+ * Consider a handler your "final" middleware, usually it's the one that adds the HTML to the response.
+ * 
  * Example:
  * ```
  * const myHandler: Handler<{username: string}> = (ctx) => {
@@ -28,7 +30,7 @@ export type MethodWildcard = "ALL";
  * }
  * ```
  */
-export type Handler<ParamsType = {}> = Middleware<ParamsType> | SyncMiddleware<ParamsType>;
+export type Handler<ParamsType = {}, StateType = any> = Middleware<ParamsType, StateType> | SyncMiddleware<ParamsType, StateType>;
 // ((ctx: Context<ParamsType>) => any | Promise<any>) | Middleware<ParamsType>;
 
 /**
@@ -56,8 +58,10 @@ export type PathParams<S extends string> =
 
 /**
  * Router wraps the tiny-request-router `Router` with a more strict RouteHandler type and automatic params typings.
+ * 
+ * Optionally you can supply a generic type definition for state that is shared between all endpoints in this router.
  */
-export class Router {
+export class Router<InitialStateType={}> {
   /**
      * The wrapped tiny-request-router Router.
      */
@@ -69,7 +73,7 @@ export class Router {
 
   public get<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.get(path, handler, opts);
@@ -78,7 +82,7 @@ export class Router {
 
   public post<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.post(path, handler, opts);
@@ -87,7 +91,7 @@ export class Router {
 
   public head<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.head(path, handler, opts);
@@ -96,7 +100,7 @@ export class Router {
 
   public patch<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.patch(path, handler, opts);
@@ -105,7 +109,7 @@ export class Router {
 
   public put<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.put(path, handler, opts);
@@ -114,7 +118,7 @@ export class Router {
 
   public all<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.all(path, handler, opts);
@@ -123,7 +127,7 @@ export class Router {
 
   public delete<S extends string>(
     path: S,
-    handler: Handler<PathParams<S>>,
+    handler: Handler<PathParams<S>, InitialStateType>,
     opts?: RouteOptions,
   ) {
     this.internalRouter.delete(path, handler, opts);

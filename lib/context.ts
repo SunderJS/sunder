@@ -1,7 +1,7 @@
 import { proxyRequest } from "./util/request";
 import { HttpStatus as HTTP } from "./status";
 import { assert } from "./util/assert";
-import { createError } from "./util/error";
+import { createHttpError } from "./util/error";
 import { ResponseData } from "./util/response";
 
 export type ErrorProperties = object;
@@ -88,7 +88,7 @@ export class Context<ParamsType = {}, StateType = any> {
     message?: string | Error,
     props?: object,
   ) {
-    throw createError(statusOrError, message, props);
+    throw createHttpError(statusOrError, message, props);
   }
 
   public assert = assert;

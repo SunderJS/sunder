@@ -2,7 +2,7 @@ import { ErrorProperties } from "../context";
 import { HttpStatus as HTTP } from "../status";
 
 import eql from "fast-deep-equal/es6";
-import { createError } from "./error";
+import { createHttpError } from "./error";
 
 /* Based on https://github.com/jshttp/http-assert */
 
@@ -13,7 +13,7 @@ export function assertFunc(
   opts?: ErrorProperties,
 ) {
   if (value) return;
-  throw createError(status, msg as any, opts as any);
+  throw createHttpError(status, msg as any, opts as any);
 }
 
 /**

@@ -31,7 +31,6 @@ export type MethodWildcard = "ALL";
  * ```
  */
 export type Handler<ParamsType = {}, StateType = any> = Middleware<ParamsType, StateType> | SyncMiddleware<ParamsType, StateType>;
-// ((ctx: Context<ParamsType>) => any | Promise<any>) | Middleware<ParamsType>;
 
 /**
  * A stronger-typed version of `RouteMatch` in tiny-request-router
@@ -116,6 +115,24 @@ export class Router<InitialStateType={}> {
     return this;
   }
 
+  public delete<S extends string>(
+    path: S,
+    handler: Handler<PathParams<S>, InitialStateType>,
+    opts?: RouteOptions,
+  ) {
+    this.internalRouter.delete(path, handler, opts);
+    return this;
+  }
+
+  public options<S extends string>(
+    path: S,
+    handler: Handler<PathParams<S>, InitialStateType>,
+    opts?: RouteOptions,
+  ) {
+    this.internalRouter.options(path, handler, opts);
+    return this;
+  }
+
   public all<S extends string>(
     path: S,
     handler: Handler<PathParams<S>, InitialStateType>,
@@ -125,14 +142,6 @@ export class Router<InitialStateType={}> {
     return this;
   }
 
-  public delete<S extends string>(
-    path: S,
-    handler: Handler<PathParams<S>, InitialStateType>,
-    opts?: RouteOptions,
-  ) {
-    this.internalRouter.delete(path, handler, opts);
-    return this;
-  }
 
   public match<S extends string>(
     method: string,

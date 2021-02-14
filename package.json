@@ -13,7 +13,7 @@
     },
     "description": "Minimal server-side framework for service workers (such as Cloudflare Workers)",
     "scripts": {
-        "build": "rimraf dist && tsc",
+        "build": "rimraf build && tsc",
         "tsc": "tsc",
         "test": "jest",
         "dist": "npm i && npm t && npm run build && cp package.json build/lib/ && cp README.md build/lib/ && cd build/lib && npm publish --ignore-scripts",

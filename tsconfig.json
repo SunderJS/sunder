@@ -13,6 +13,7 @@
       "preserveConstEnums": true,
       "sourceMap": true,
       "declaration": true,
+      "experimentalDecorators": true,
     },
     "include": [
       "./lib/**/*.ts",

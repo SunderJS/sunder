@@ -5,7 +5,7 @@ import {
   Router as TRRouter,
 } from "tiny-request-router";
 import { Context } from "../context";
-import { Middleware, MiddlewareNextFunction, SyncMiddleware } from "../middlewareTypes";
+import { Middleware, MiddlewareNextFunction, MiddlewareWithoutNextArgument, SyncMiddleware, SyncMiddlewareWithoutNextArgument } from "../middlewareTypes";
 
 export type Method =
   | "GET"
@@ -18,10 +18,10 @@ export type Method =
 export type MethodWildcard = "ALL";
 
 /**
- * A handler function just takes a context, you have to type the generic <Params> to use params 
- * in your Handler in a type-checked manner.
+ * A handler function is a Middleware can take the next argument optionally, it only makes sense as the final element in the middleware chain.
+ * Consider a handler your "final" middleware, usually it's the one that adds the HTML/JSON/.. to the response.
  * 
- * Consider a handler your "final" middleware, usually it's the one that adds the HTML to the response.
+ * Use generic `ParamsType` to use params in your Handler in a type-checked manner.
  * 
  * Example:
  * ```
@@ -30,7 +30,11 @@ export type MethodWildcard = "ALL";
  * }
  * ```
  */
-export type Handler<ParamsType = {}, StateType = any> = Middleware<ParamsType, StateType> | SyncMiddleware<ParamsType, StateType>;
+export type Handler<ParamsType = {}, StateType = any> =
+  Middleware<ParamsType, StateType>
+  | SyncMiddleware<ParamsType, StateType>
+  | MiddlewareWithoutNextArgument<ParamsType, StateType>
+  | SyncMiddlewareWithoutNextArgument<ParamsType, StateType>;
 
 /**
  * A stronger-typed version of `RouteMatch` in tiny-request-router

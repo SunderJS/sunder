@@ -23,7 +23,7 @@ export type HeadersShorthands = {
   has: typeof Headers.prototype.has;
 };
 
-export class Context<ParamsType = {}, StateType = any> {
+export class Context<ParamsType = {}, StateType = {}, StateAdditions = {}> {
   public readonly event: FetchEvent;
 
   public request: Request & HeadersShorthands;
@@ -52,7 +52,7 @@ export class Context<ParamsType = {}, StateType = any> {
   /**
    * The recommended namespace for passing information through middleware and to your frontend views.
    */
-  public state: StateType;
+  public state: StateType & Partial<StateAdditions>;
 
   constructor(event: FetchEvent) {
     this.event = event;

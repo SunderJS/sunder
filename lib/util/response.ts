@@ -1,15 +1,15 @@
 /**
  * This module was for the most part based on the code of cfworker's RequestBuilder
  * https://github.com/cfworker/cfworker/blob/master/packages/web/src/response-builder.ts
- * 
+ *
  * The main differences:
  * - No magic static setting
  * - No magic statusText handling
  * - Body can not be null, instead it detauls to undefined like in BodyInit
  * - Removed etag, lastModified, type helpers, instead added 'set' and 'get' shorthands.
- * 
+ *
  * (MIT Licensed)
-*/
+ */
 
 import { HeadersShorthands } from "../context";
 import { HttpStatus, RedirectStatus } from "../status";
@@ -17,16 +17,10 @@ import { HttpStatus, RedirectStatus } from "../status";
 /**
  * The different types that can be sniffed and converted to a valid body automatically.
  */
-export type ExtendedBodyInit =
-  | BodyInit
-  | boolean
-  | Date
-  | number
-  | object
-  | undefined;
+export type ExtendedBodyInit = BodyInit | boolean | Date | number | object | undefined;
 
 // Polyfill: Cloudflare workers do not define the Blob class.
-const Blob = self.Blob || ((class {} as any) as Blob);
+const Blob = globalThis.Blob || (class {} as any as Blob);
 
 /**
  * The data that will be used as the response for the request.
@@ -103,7 +97,7 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
 
   /**
    * Sets the headers to a redirect header (`location`) with given status.
-   * @param url 
+   * @param url
    * @param status Status of redirect, default to Status Found (302).
    */
   redirect(url: string | URL, status: RedirectStatus = HttpStatus.Found) {
@@ -116,9 +110,7 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
    */
   createResponse() {
     const { body: rawBody, status, statusText, headers } = this;
-    const body = this._stringifyBody
-      ? JSON.stringify(rawBody)
-      : (rawBody as BodyInit);
+    const body = this._stringifyBody ? JSON.stringify(rawBody) : (rawBody as BodyInit);
     return new Response(body, { status, statusText, headers });
   }
 }

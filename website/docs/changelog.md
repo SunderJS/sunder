@@ -2,7 +2,10 @@
 id: changelog
 title: Changelog
 ---
+## 0.7.2
+**Date:** 2021-05-24
 
+* Changed `self.Blob` to `globalThis.Blob` to support different environments more easily.
 
 ## 0.7.1
 **Date:** 2021-02-14

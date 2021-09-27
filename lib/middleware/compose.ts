@@ -8,7 +8,7 @@ import { Middleware, MiddlewareNextFunction } from "../middlewareTypes";
  * Based on the code in the MIT licensed `koa-compose` package.
  *
  */
-export function compose(middleware: Middleware[]): Middleware {
+export function compose<EnvironmentType>(middleware: Middleware<EnvironmentType>[]): Middleware<EnvironmentType> {
   if (!Array.isArray(middleware)) {
     throw new TypeError("Middleware stack must be an array!");
   }
@@ -19,7 +19,7 @@ export function compose(middleware: Middleware[]): Middleware {
     }
   }
 
-  return function (context: Context, next: MiddlewareNextFunction) {
+  return function (context: Context<EnvironmentType>, next: MiddlewareNextFunction) {
     let lastCalledIndex = -1;
     return (async function dispatch(
       currentCallIndex,

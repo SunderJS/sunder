@@ -5,6 +5,7 @@
 **Sunder** is a minimal server-side framework for ServiceWorker environments. It is intended for websites and APIs built on [Cloudflare Workers](https://workers.cloudflare.com/).
 
 Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure. Also important: it is easy to write tests for.
+Sunder allows you to be strict about the data your routes expect to give you more certainty in production: the environment, parameter and state can be defined and will be type checked for you.
 
 <!-- Technologies it pairs with especially well:
 
@@ -54,6 +55,36 @@ addEventListener('fetch', (event) => {
   const fe = event as FetchEvent; // Only required in Typescript
   fe.respondWith(app.handle(fe));
 });
+```
+
+## Modules example
+
+```typescript
+import {Sunder, Router, Context} from "sunder";
+
+const app = new Sunder();
+const router = new Router();
+
+// Example route with a named parameter
+router.get("/hello/:username", ({response, params}) => {
+    response.body = `Hello ${params.username}`;
+});
+
+// Example middleware
+app.use(async (ctx, next) => {
+    const start = Date.now();
+    await next();
+
+    const ms = Date.now() - start;
+    ctx.response.set('X-Response-Time', `${ms}ms`);    
+});
+app.use(router.middleware);
+
+export default {
+    fetch(request, ctx, env) {
+        return app.fetch(request, ctx, env);
+    }
+};
 ```
 
 ## Highlight feature: strict route parameters

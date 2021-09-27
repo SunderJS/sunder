@@ -23,14 +23,14 @@ describe("Router matching", () => {
     const match = router.match("GET", "/route");
     expect(match).toBeDefined();
 
-    const ctx = new Context(createFetchEvent());
+    const ctx = new Context(createFetchEvent(), {});
     await match!.handler(ctx, () => undefined);
     expect(ctx.response.headers.get("my-header")).toEqual("some-value");
   });
 
   test("Router middleware sets params", async () => {
     const testId = "abc";
-    const r = (ctx: Context<{ id: string }>) => {
+    const r = (ctx: Context<{}, { id: string }>) => {
       expect(ctx.params.id).toEqual(testId);
     };
 
@@ -38,7 +38,7 @@ describe("Router matching", () => {
     router.get("/post/:id", r);
 
     const req = new Request(`/post/${testId}`, { method: "GET" });
-    const context = new Context(createFetchEvent(req));
+    const context = new Context(createFetchEvent(req), {});
 
     await router.middleware(context);
   });
@@ -46,7 +46,7 @@ describe("Router matching", () => {
   test("Router middleware throws 404 http error on unknown route", async () => {
     const router = new Router();
     const req = new Request(`/doesntexist`, { method: "GET" });
-    const context = new Context(createFetchEvent(req));
+    const context = new Context(createFetchEvent(req), {});
 
     try {
       await router.middleware(context, async () => {
@@ -61,7 +61,7 @@ describe("Router matching", () => {
 
   test("Understands /:name+ routes", async () => {
     const testPath = "abc/def";
-    const r = (ctx: Context<{ path: string }>) => {
+    const r = (ctx: Context<{}, { path: string }>) => {
       expect(ctx.params.path).toEqual(testPath);
     };
 
@@ -69,7 +69,7 @@ describe("Router matching", () => {
     router.get("/post/:path+", r);
 
     const req = new Request(`/post/${testPath}`, { method: "GET" });
-    const context = new Context(createFetchEvent(req));
+    const context = new Context(createFetchEvent(req), {});
 
     await router.middleware(context);
   });

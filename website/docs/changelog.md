@@ -2,6 +2,17 @@
 id: changelog
 title: Changelog
 ---
+## 0.8.0
+**Date:** 2021-09-27
+
+* **Breaking Change:** All Sunder types now take an additional `EnvironmentType` generic type argument, it is the first such argument (before `ParamsType` and `StateType`).  
+    The *tl;dr* fix is to replace `Context<{id: string}>` with `Context<{}, {id: string}>`.
+* Performance improvement for `get`, `set` and `has` shorthands on `ctx.request` an anonymous function was created on every invocation before this change.
+* Support for `modules` build-mode in Cloudflare Workers.
+  * A new `fetch` method was added to `Sunder` applications that has the same signature as the 
+  * The `handle` method on `Sunder` now takes a second argument where you can provide your own `env` in case you are not using `modules`.
+  * The Sunder Context now has a `env` field, which is type-checked by the Typescript compiler (and supports auto-completion!). 
+
 ## 0.7.2
 **Date:** 2021-05-24
 

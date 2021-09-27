@@ -1,6 +1,6 @@
 {
     "name": "sunder",
-    "version": "0.7.2",
+    "version": "0.8.0",
     "license": "MIT",
     "author": "Guido Zuidhof <me@guido.io>",
     "funding": {
@@ -11,7 +11,7 @@
         "type": "git",
         "url": "github.com/gzuidhof/sunder"
     },
-    "description": "Minimal server-side framework for service workers (such as Cloudflare Workers)",
+    "description": "Minimal, strict, server-side framework for service workers (such as Cloudflare Workers)",
     "scripts": {
         "build": "rimraf build && tsc",
         "tsc": "tsc",
@@ -23,6 +23,7 @@
     "module": "index.js",
     "types": "index.d.ts",
     "devDependencies": {
+        "@cloudflare/workers-types": "^2.2.2",
         "@peculiar/webcrypto": "^1.1.4",
         "@types/http-errors": "^1.8.0",
         "@types/node": "^14.14.10",

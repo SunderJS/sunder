@@ -8,8 +8,9 @@ export function getResponse(
   app: Sunder,
   url: string,
   requestData?: RequestInit,
+  env?: Record<string, any>
 ) {
   const request = new Request(url, requestData);
   const event = new FetchEvent("fetch", { request: request });
-  return app.handle(event);
+  return app.handle(event, env);
 }

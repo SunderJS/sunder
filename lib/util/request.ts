@@ -4,6 +4,8 @@ import { HeadersShorthands } from "../context";
 /**
  * Proxies a Request object such that the body parsing functions are consumable multiple
  * times by caching the result. It also parses JSON with protection against prototype poisoning.
+ * 
+ * This is a proxy in the Javascript Proxy sense - not a proxied/forwarded request, nothing goes over the network.
  * @param request
  */
 export function proxyRequest(request: Request): Request & HeadersShorthands {
@@ -11,6 +13,11 @@ export function proxyRequest(request: Request): Request & HeadersShorthands {
   let _formData: Promise<FormData> | undefined;
   let _json: Promise<any> | undefined;
   let _text: Promise<string> | undefined;
+
+  // Convenience shorthands
+  let _get = (name: string) => request.headers.get(name);
+  let _set = (name: string, value: string) => request.headers.set(name, value);
+  let _has = (name: string) => request.headers.has(name);
 
   return new Proxy(request, {
     get(target, property, receiver) {
@@ -38,11 +45,11 @@ export function proxyRequest(request: Request): Request & HeadersShorthands {
 
         // Convenience shorthands
       } else if (property === "get") {
-        return (name: string) => target.headers.get(name);
+        return _get;
       } else if (property === "set") {
-        return (name: string, value: string) => target.headers.set(name, value);
+        return _set;
       } else if (property === "has") {
-        return (name: string) => target.headers.has(name);
+        return _has;
       }
 
       return (target as any)[property];

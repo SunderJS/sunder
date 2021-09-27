@@ -6,7 +6,7 @@ export function createEmptyFetchEvent() {
 }
 
 export function createEmptyContext() {
-    return new Context(createEmptyFetchEvent());
+    return new Context(createEmptyFetchEvent(), {});
 }
 
 export async function applyOnEmptyContext(middleware: Middleware | Middleware[]) {

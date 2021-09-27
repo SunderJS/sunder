@@ -3,6 +3,7 @@ import { HttpStatus as HTTP } from "./status";
 import { assert } from "./util/assert";
 import { createHttpError } from "./util/error";
 import { ResponseData } from "./util/response";
+import { CloudflareEventFunctions } from "./application";
 
 export type ErrorProperties = object;
 export type Params = Record<string, string | undefined> | {};
@@ -23,11 +24,12 @@ export type HeadersShorthands = {
   has: typeof Headers.prototype.has;
 };
 
-export class Context<ParamsType = {}, StateType = any> {
-  public readonly event: FetchEvent;
+export class Context<EnvironmentType = Record<string, any>, ParamsType = {}, StateType = any> {
+  public readonly event: CloudflareEventFunctions;
 
   public request: Request & HeadersShorthands;
   public url: URL;
+  public env: EnvironmentType;
 
   /**
    * The values that are extracted from the url path. 
@@ -54,7 +56,8 @@ export class Context<ParamsType = {}, StateType = any> {
    */
   public state: StateType;
 
-  constructor(event: FetchEvent) {
+  constructor(event: CloudflareEventFunctions & {request: Request}, env: EnvironmentType) {
+    this.env = env;
     this.event = event;
     this.request = proxyRequest(event.request);
     this.url = new URL(this.request.url);
@@ -97,5 +100,5 @@ export class Context<ParamsType = {}, StateType = any> {
 /**
  * Drop in replacement for `Context` that is strict when it comes to state (defaulting to an empty state instead of `any`).
  */
-export class StrictContext<ParamsType = {}, StateType = {}>
-  extends Context<ParamsType, StateType> {}
+export class StrictContext<EnvironmentType = {}, ParamsType = {}, StateType = {}>
+  extends Context<EnvironmentType, ParamsType, StateType> {}

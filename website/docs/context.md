@@ -26,7 +26,7 @@ Often parameters for the request are encoded in the `Request`'s path. If you use
 
 ```typescript
 // This could be used as a handler for route `/posts/:author`
-app.use(async ({params}: Context<{author: string}>) => {
+app.use(async ({params}: Context<{}, {author: string}>) => {
   response.body = `This is a post by ${params.author}`;
 });
 ```

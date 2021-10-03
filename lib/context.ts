@@ -4,6 +4,7 @@ import { assert } from "./util/assert";
 import { createHttpError } from "./util/error";
 import { ResponseData } from "./util/response";
 import { CloudflareEventFunctions } from "./application";
+import { MissingDurableObjectState } from "./util/errorHints";
 
 export type ErrorProperties = object;
 export type Params = Record<string, string | undefined> | {};
@@ -24,8 +25,8 @@ export type HeadersShorthands = {
   has: typeof Headers.prototype.has;
 };
 
-export class Context<EnvironmentType = Record<string, any>, ParamsType = {}, StateType = any> {
-  public readonly event: CloudflareEventFunctions;
+export class Context<EnvironmentType = Record<string, any>, ParamsType = {}, ContextDataType = any> {
+  public readonly event: CloudflareEventFunctions & Record<string, any>;
 
   public request: Request & HeadersShorthands;
   public url: URL;
@@ -54,15 +55,22 @@ export class Context<EnvironmentType = Record<string, any>, ParamsType = {}, Sta
   /**
    * The recommended namespace for passing information through middleware and to your frontend views.
    */
-  public state: StateType;
+  public data: ContextDataType;
 
-  constructor(event: CloudflareEventFunctions & {request: Request}, env: EnvironmentType) {
-    this.env = env;
-    this.event = event;
-    this.request = proxyRequest(event.request);
+  /**
+   * The Durable Object state.
+   * 
+   */
+  public state: DurableObjectState;
+
+  constructor(opts: {event: CloudflareEventFunctions, request: Request, env: EnvironmentType, state?: DurableObjectState}) {
+    this.env = opts.env;
+    this.event = opts.event;
+    this.request = proxyRequest(opts.request);
     this.url = new URL(this.request.url);
     this.response = new ResponseData();
-    this.state = Object.create(null);
+    this.data = Object.create(null);
+    this.state = opts.state || MissingDurableObjectState;
   }
 
   public waitUntil(promise: Promise<any>) {
@@ -98,7 +106,7 @@ export class Context<EnvironmentType = Record<string, any>, ParamsType = {}, Sta
 }
 
 /**
- * Drop in replacement for `Context` that is strict when it comes to state (defaulting to an empty state instead of `any`).
+ * Drop in replacement for `Context` that is strict when it comes to user data (defaulting to an empty object instead of `any`).
  */
-export class StrictContext<EnvironmentType = {}, ParamsType = {}, StateType = {}>
-  extends Context<EnvironmentType, ParamsType, StateType> {}
+export class StrictContext<EnvironmentType = {}, ParamsType = {}, ContextDataType = {}>
+  extends Context<EnvironmentType, ParamsType, ContextDataType> {}

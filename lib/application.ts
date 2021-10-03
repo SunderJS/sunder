@@ -1,27 +1,31 @@
 import { Context } from "./context";
 import { apply } from "./middleware/apply";
 import { Middleware } from "./middlewareTypes";
+import { MissingEnv} from "./util/errorHints"
 
-export type CloudflareEventFunctions = Pick<FetchEvent, "waitUntil" | "passThroughOnException">
+export type CloudflareEventFunctions = Pick<FetchEvent, "waitUntil"> & Partial<Pick<FetchEvent, "passThroughOnException">>
 
+/**
+ * The main Sunder app class, this is the root of your Sunder-powered application.
+ */
 export class Sunder<EnvironmentType = Record<string, any>> {
+    public state?: DurableObjectState;
     public silent = false;
-
+    
     private middleware: Middleware<EnvironmentType, any>[] = [];
+    
+    constructor(opts: {state?: DurableObjectState} = {}) {
+        this.state = opts.state;
+    }
 
     /**
      * Handles given FetchEvent and returns a promise of the response. Note that this function catches errors and delegates them to the `this.onerror` function.
      * 
      * An optional second argument with the environment can be supplied.
      */
-    async handle(event: CloudflareEventFunctions & {request: Request}, env?: EnvironmentType) {
-        if (env === undefined) {
-            // Note: We can not check this type without forcing the user to pass in their own env
-            // as we don't want to force users to 
-            env = {} as EnvironmentType; 
+    async handle(event: CloudflareEventFunctions & {request: Request}, env: EnvironmentType = (MissingEnv as EnvironmentType)) {
+        const ctx = new Context({event, env, request: event.request, state: this.state});
 
-        }
-        const ctx = new Context(event, env);
         try {
             await apply(this.middleware, ctx);
         }
@@ -31,8 +35,10 @@ export class Sunder<EnvironmentType = Record<string, any>> {
         return ctx.response.createResponse();
     }
 
-    fetch(request: Request, env: EnvironmentType, ctx: CloudflareEventFunctions) {
-        return this.handle({...ctx, request: request}, env)
+    fetch(request: Request, env: EnvironmentType, ctx: FetchEvent | CloudflareEventFunctions) {
+        // @ts-ignore
+        ctx.request = request;
+        return this.handle(ctx as typeof ctx & {request: Request}, env)
     }
 
     /**

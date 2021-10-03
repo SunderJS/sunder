@@ -43,7 +43,7 @@ export function proxyRequest(request: Request): Request & HeadersShorthands {
         }
         return () => _text = target.text();
 
-        // Convenience shorthands
+      // Convenience shorthands
       } else if (property === "get") {
         return _get;
       } else if (property === "set") {

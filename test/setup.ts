@@ -1,5 +1,6 @@
 // set up global namespace for worker environment
 
+//@ts-ignore
 import makeCloudflareWorkerEnv from "cloudflare-worker-mock";
 
 // Node polyfills

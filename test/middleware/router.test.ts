@@ -8,6 +8,16 @@ function createFetchEvent(request?: Request) {
   return new FetchEvent("fetch", { request });
 }
 
+function createContextData(request?: Request, env: Record<string, any> = {}) {
+  const event = createFetchEvent(request);
+  return {
+    event,
+    request: event.request,
+    env
+  }
+
+}
+
 describe("Router matching", () => {
   test("Router matches", async () => {
     const myRoute = (ctx: Context) => {
@@ -23,7 +33,7 @@ describe("Router matching", () => {
     const match = router.match("GET", "/route");
     expect(match).toBeDefined();
 
-    const ctx = new Context(createFetchEvent(), {});
+    const ctx = new Context(createContextData());
     await match!.handler(ctx, () => undefined);
     expect(ctx.response.headers.get("my-header")).toEqual("some-value");
   });
@@ -38,7 +48,7 @@ describe("Router matching", () => {
     router.get("/post/:id", r);
 
     const req = new Request(`/post/${testId}`, { method: "GET" });
-    const context = new Context(createFetchEvent(req), {});
+    const context = new Context(createContextData(req));
 
     await router.middleware(context);
   });
@@ -46,7 +56,7 @@ describe("Router matching", () => {
   test("Router middleware throws 404 http error on unknown route", async () => {
     const router = new Router();
     const req = new Request(`/doesntexist`, { method: "GET" });
-    const context = new Context(createFetchEvent(req), {});
+    const context = new Context(createContextData(req));
 
     try {
       await router.middleware(context, async () => {
@@ -69,7 +79,7 @@ describe("Router matching", () => {
     router.get("/post/:path+", r);
 
     const req = new Request(`/post/${testPath}`, { method: "GET" });
-    const context = new Context(createFetchEvent(req), {});
+    const context = new Context(createContextData(req));
 
     await router.middleware(context);
   });

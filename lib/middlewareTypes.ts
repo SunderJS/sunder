@@ -1,13 +1,13 @@
 import { Context } from "./context";
 
-export type Middleware<EnvironmentType = Record<string, any>, ParamsType = any, StateType = any> = (
-  ctx: Context<EnvironmentType, ParamsType, StateType>,
+export type Middleware<EnvironmentType = Record<string, any>, ParamsType = any, ContextDataType = any> = (
+  ctx: Context<EnvironmentType, ParamsType, ContextDataType>,
   next: MiddlewareNextFunction,
 ) => Promise<any>;
 
 /** A synchronous middleware only makes sense for a final handler */
-export type SyncMiddleware<EnvironmentType = Record<string, any>, ParamsType = any, StateType = any> = (
-  ctx: Context<EnvironmentType, ParamsType, StateType>,
+export type SyncMiddleware<EnvironmentType = Record<string, any>, ParamsType = any, ContextDataType = any> = (
+  ctx: Context<EnvironmentType, ParamsType, ContextDataType>,
   next: MiddlewareNextFunction,
 ) => any;
 

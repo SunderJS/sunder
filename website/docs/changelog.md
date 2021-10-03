@@ -2,6 +2,13 @@
 id: changelog
 title: Changelog
 ---
+
+## 0.9.0
+**Date:** 2021-10-02
+* **Breaking Change**: `Context.state` has been renamed to `Context.data` to prevent confusion when using Durable Objects.
+* The Sunder app constructor now takes a `state` argument for injecting Durable Object state.
+* `Context.state` now contains a Durable Worker state (if any), this means that Sunder now has first class Durable Objects support!
+
 ## 0.8.0
 **Date:** 2021-09-27
 

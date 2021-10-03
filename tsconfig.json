@@ -1,24 +1,30 @@
 {
-    "compilerOptions": {
-      "outDir": "./build",
-      "module": "esnext",
-      "target": "esnext",
-      "lib": ["WebWorker", "ESNext"],
-      "types": ["jest", "types-cloudflare-worker/global"],
-      "moduleResolution": "node",
-      "alwaysStrict": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "preserveConstEnums": true,
-      "sourceMap": true,
-      "declaration": true,
-    },
-    "include": [
-      "./lib/**/*.ts",
-      "./test/**/*.ts",
-      "./node_modules/types-cloudflare-worker/global.d.ts",
+  "compilerOptions": {
+    "outDir": "./build/lib",
+    "module": "esnext",
+    "target": "esnext",
+    "lib": [
+      "WebWorker",
+      "ESNext"
     ],
-    "exclude": ["node_modules/", "build/"]
-  }
-  
+    "types": [
+      "jest",
+      "@cloudflare/workers-types"
+    ],
+    "moduleResolution": "node",
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+  },
+  "include": [
+    "./lib/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules/",
+    "build/"
+  ]
+}

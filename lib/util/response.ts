@@ -17,7 +17,7 @@ import { HttpStatus, RedirectStatus } from "../status";
 /**
  * The different types that can be sniffed and converted to a valid body automatically.
  */
-export type ExtendedBodyInit = BodyInit | boolean | Date | number | object | undefined;
+export type ExtendedBodyInit = BodyInit | boolean | Date | number | object | undefined | null;
 
 // Polyfill: Cloudflare workers do not define the Blob class.
 const Blob = globalThis.Blob || (class {} as any as Blob);
@@ -30,6 +30,11 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
   public status?: number;
   public statusText?: string;
 
+  /**
+   * Cloudflare Worker websocket, non-standard API
+   */
+  public webSocket?: any;
+
   private _implicitType = false;
   private _stringifyBody = false;
   private _body: ExtendedBodyInit;
@@ -41,7 +46,7 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
     this._body = value;
 
     // no content
-    if (value === undefined) {
+    if (value === undefined || value === null) {
       this.headers.delete("content-type");
       this.headers.delete("content-length");
       this.headers.delete("transfer-encoding");
@@ -109,8 +114,8 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
    * Create a native Response object, which is what FetchEvent expects.
    */
   createResponse() {
-    const { body: rawBody, status, statusText, headers } = this;
+    const { body: rawBody, status, statusText, headers, webSocket } = this;
     const body = this._stringifyBody ? JSON.stringify(rawBody) : (rawBody as BodyInit);
-    return new Response(body, { status, statusText, headers });
+    return new Response(body, { status, statusText, headers, webSocket } as any);
   }
 }

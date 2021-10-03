@@ -3,6 +3,10 @@ id: changelog
 title: Changelog
 ---
 
+## 0.9.1
+**Date:** 2021-10-03
+* Add `webSocket` field to Response to match Cloudflare's (non-standard) API.
+
 ## 0.9.0
 **Date:** 2021-10-02
 * **Breaking Change**: `Context.state` has been renamed to `Context.data` to prevent confusion when using Durable Objects.

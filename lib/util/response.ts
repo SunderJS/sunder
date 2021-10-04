@@ -5,7 +5,6 @@
  * The main differences:
  * - No magic static setting
  * - No magic statusText handling
- * - Body can not be null, instead it detauls to undefined like in BodyInit
  * - Removed etag, lastModified, type helpers, instead added 'set' and 'get' shorthands.
  *
  * (MIT Licensed)
@@ -109,6 +108,30 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
     this.status = status;
     this.headers.set("location", url instanceof URL ? url.href : url);
   }
+
+  /**
+   * Overwrite the response with given response, useful when you are passing on a request from a Durable Object
+   * or some other fetch request.
+   * 
+   * @param response Response that will overwrite the response being constructed so far.
+   * @param opts You can set the option to `mergeHeaders` here, which keeps existing headers unless they are
+   * overwritten. This is useful when you have middleware that set specific headers (such as CORS)
+   * which you don't want to drop.
+   */
+  overwrite(response: Response, opts: {mergeHeaders?: boolean} = {}) {
+    if (opts.mergeHeaders) {
+      for(const [k,v] of response.headers) {
+        this.headers.set(k, v);
+      }
+    } else {
+      this.headers = response.headers;
+    }
+    this.body = response.body;
+    this.status = response.status;
+    this.statusText = response.statusText;
+    this.webSocket = (response as any).webSocket;
+  }
+
 
   /**
    * Create a native Response object, which is what FetchEvent expects.

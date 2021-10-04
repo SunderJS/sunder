@@ -2,10 +2,15 @@
 id: changelog
 title: Changelog
 ---
+## 0.9.2
+**Date:** 2021-10-04
+* Added `Context.response.overwrite` which allows you to overwrite the Response built up so far.
+  This is very useful in the context of Durable Objects, in which you may want to forward the response.
 
 ## 0.9.1
 **Date:** 2021-10-03
 * Add `webSocket` field to Response to match Cloudflare's (non-standard) API.
+* You can now pass `null` to construct a body.
 
 ## 0.9.0
 **Date:** 2021-10-02

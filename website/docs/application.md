@@ -25,7 +25,7 @@ addEventListener('fetch', (event) => {
 
 ## Cascading
 
-Sunder middleware cascade in a more traditional way as you may be used to with similar tools - with async functions we can achieve "true" middleware. Contrasting [Express](https://expressjs.com)'s implementation which simply passes control through series of functions until one returns, Sunder invokes "downstream", then control flows back "upstream".
+Sunder middleware cascade in a more traditional way than you may be used to with similar tools. With async functions we can achieve "true" middleware. Contrasting [Express](https://expressjs.com)'s implementation which simply passes control through series of functions until one returns, Sunder invokes "downstream", then control flows back "upstream".
 
 The following example responds with `"Hello World"`, however first the request flows through the *x-response-time* and *logging* middleware to mark when the request started, then continue to yield control through the response middleware. When a middleware invokes `next()` the function suspends and passes control to the next middleware defined. After there are no more middleware to execute downstream, the stack will unwind and each middleware is resumed to perform its upstream behaviour.
 

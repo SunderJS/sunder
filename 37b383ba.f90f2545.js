@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{74:function(o){o.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Moving Towards Cloudflare Workers Modules","permalink":"/blog/moving-towards-modules"},{"title":"Introducing Sunder","permalink":"/blog/introducing-sunder"}]}')}}]);

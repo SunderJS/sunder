@@ -5,7 +5,9 @@
 **Sunder** is a minimal server-side framework for ServiceWorker environments. It is intended for websites and APIs built on [Cloudflare Workers](https://workers.cloudflare.com/).
 
 Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure.
-Sunder aims to be:
+
+
+Sunder is
 * Fast 
 * Small
 * Easy to test

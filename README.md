@@ -4,17 +4,12 @@
 
 **Sunder** is a minimal server-side framework for ServiceWorker environments. It is intended for websites and APIs built on [Cloudflare Workers](https://workers.cloudflare.com/).
 
-Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure. Also important: it is easy to write tests for.
-Sunder allows you to be strict about the data your routes expect to give you more certainty in production: the environment, parameter and state can be defined and will be type checked for you.
-
-<!-- Technologies it pairs with especially well:
-
-* [Serverless worker environments](https://workers.cloudflare.com/).
-* [ESBuild](https://esbuild.github.io/) for <50ms builds, allowing for very fast iteration.
-* [lit-html](https://https://lit-html.polymer-project.org/) for both [serverside](https://github.com/popeindustries/lit-html-server) and clientside templating. This enables websites without a runtime/front-end framework.
-* [Typescript](https://https://www.typescriptlang.org/). Sunder is especially strict when it comes to path parameters: parameters in routes are statically checked at build time!
-
-All four of these are optional in your own project. -->
+Think of it as Express or Koa for serverless which allows you to quickly build websites and APIs in a modern async structure.
+Sunder aims to be:
+* Fast 
+* Small
+* Easy to test
+* Typesafe as much as possible
 
 **The easiest way to get started with Sunder on Cloudflare Workers is to use the [template project](https://github.com/gzuidhof/sunder-worker-template).**
 
@@ -92,7 +87,7 @@ export default {
 
 ## Inspiration
 
-The Sunder framework was inspired by Elixir's [plug](https://github.com/elixir-plug/plug), Node's [Koa](https://koajs.com/) framework, [tiny-request-router]() and [cfworker](https://github.com/cfworker/cfworker)'s web package.
+The Sunder framework was inspired by Elixir's [plug](https://github.com/elixir-plug/plug), Node's [Koa](https://koajs.com/) framework, [tiny-request-router](https://www.npmjs.com/package/tiny-request-router) and [cfworker](https://github.com/cfworker/cfworker)'s web package.
 
 Sunder is only a few hundred lines of code. It has little magic and doesn't impose too much structure.
 

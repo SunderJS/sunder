@@ -13,7 +13,7 @@ app.use(async ctx => {
 });
 ```
 
-Often writing writing it like this instead makes for cleaner middleware:
+Often writing it like this instead makes for cleaner middleware:
 
 ```typescript
 app.use(async ({response}) => {

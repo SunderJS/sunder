@@ -1,4 +1,4 @@
-<img width="517" alt="Sunder Logo" src="https://user-images.githubusercontent.com/1039510/141460582-ff476f0e-e6e3-424c-933e-afb70b5b2e59.png">
+<img width="517" alt="Sunder Logo" src="https://user-images.githubusercontent.com/1039510/141460738-b9d5a5dc-f819-41fb-828c-00e578079d71.png">
 
 [![CI](https://github.com/gzuidhof/Sunder/workflows/CI/badge.svg)](https://github.com/gzuidhof/Sunder/actions)
 [![License](https://img.shields.io/github/license/sunderjs/sunder)](./LICENSE)

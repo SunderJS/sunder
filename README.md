@@ -15,15 +15,14 @@ Sunder is
 
 **The easiest way to get started with Sunder on Cloudflare Workers is to use the [template project](https://github.com/gzuidhof/sunder-worker-template).**
 
-## Documentation
-Read the documentation [**here**](https://sunderjs.com/docs), or check out the introductory blog post [here](https://sunderjs.com/blog).
-
 ## Installation
 ```bash
 npm i --save sunder
 # or
 yarn add sunder
 ```
+
+Read the documentation [**here**](https://sunderjs.com/docs) to get started.
 
 ## Example
 

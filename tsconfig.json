@@ -4,7 +4,6 @@
     "module": "esnext",
     "target": "esnext",
     "lib": [
-      "WebWorker",
       "ESNext"
     ],
     "types": [

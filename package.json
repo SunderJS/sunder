@@ -1,6 +1,6 @@
 {
     "name": "sunder",
-    "version": "0.9.2",
+    "version": "0.9.3",
     "license": "MIT",
     "author": "Guido Zuidhof <me@guido.io>",
     "funding": {
@@ -23,7 +23,7 @@
     "module": "index.js",
     "types": "index.d.ts",
     "devDependencies": {
-        "@cloudflare/workers-types": "^2.2.2",
+        "@cloudflare/workers-types": "^3.1.1",
         "@peculiar/webcrypto": "^1.1.4",
         "@types/http-errors": "^1.8.0",
         "@types/jest": "^27.0.2",

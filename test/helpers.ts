@@ -1,8 +1,9 @@
 import { Middleware } from "../lib/middlewareTypes";
 import { apply, Context } from "../lib";
 
-export function createEmptyFetchEvent() {
-    return new FetchEvent("fetch", {request: new Request("/")});
+export function createEmptyFetchEvent(): FetchEvent {
+    // @ts-ignore
+    return new FetchEvent("fetch", {request: new Request("/")} as any);
 }
 
 export function createEmptyContext() {

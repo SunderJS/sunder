@@ -18,9 +18,6 @@ import { HttpStatus, RedirectStatus } from "../status";
  */
 export type ExtendedBodyInit = BodyInit | boolean | Date | number | object | undefined | null;
 
-// Polyfill: Cloudflare workers do not define the Blob class.
-const Blob = globalThis.Blob || (class {} as any as Blob);
-
 /**
  * The data that will be used as the response for the request.
  */
@@ -32,7 +29,7 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
   /**
    * Cloudflare Worker websocket, non-standard API
    */
-  public webSocket?: any;
+  public webSocket?: WebSocket | null;
 
   private _implicitType = false;
   private _stringifyBody = false;
@@ -54,8 +51,6 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
 
     // set Content-Type
     if (
-      // Response will automatically use Blob's type.
-      value instanceof Blob ||
       // Response will automatically use multipart/form-data.
       value instanceof FormData ||
       // Response will automatically use application/x-www-form-urlencoded.
@@ -129,7 +124,7 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
     this.body = response.body;
     this.status = response.status;
     this.statusText = response.statusText;
-    this.webSocket = (response as any).webSocket;
+    this.webSocket = response.webSocket;
   }
 
 
@@ -139,6 +134,18 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
   createResponse() {
     const { body: rawBody, status, statusText, headers, webSocket } = this;
     const body = this._stringifyBody ? JSON.stringify(rawBody) : (rawBody as BodyInit);
-    return new Response(body, { status, statusText, headers, webSocket } as any);
+    const init: ResponseInit = {
+      headers, webSocket
+    }
+    // These next 6 lines are technically not necessary, but due to a bug in undici
+    // we will need it for now. undici is used by Miniflare. See issue https://github.com/nodejs/undici/issues/1094
+    if (status !== undefined) {
+      init.status = status;
+    }
+    if (statusText !== undefined) {
+      init.statusText = statusText;
+    }
+
+    return new Response(body, init);
   }
 }

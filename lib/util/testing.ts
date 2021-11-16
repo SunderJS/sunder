@@ -11,6 +11,7 @@ export function getResponse(
   env?: Record<string, any>
 ) {
   const request = new Request(url, requestData);
+  //@ts-ignore
   const event = new FetchEvent("fetch", { request: request });
-  return app.handle(event, env);
+  return app.handle(event as FetchEvent, env);
 }

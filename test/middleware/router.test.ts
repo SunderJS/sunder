@@ -1,11 +1,12 @@
 import { isHttpError } from "http-errors";
 import { Context, Router } from "../../lib";
 
-function createFetchEvent(request?: Request) {
+function createFetchEvent(request?: Request): FetchEvent {
   if (request === undefined) {
     request = new Request("/");
   }
-  return new FetchEvent("fetch", { request });
+  //@ts-ignore
+  return new FetchEvent("fetch", { request } as any);
 }
 
 function createContextData(request?: Request, env: Record<string, any> = {}) {

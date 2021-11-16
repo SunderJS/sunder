@@ -2,6 +2,12 @@
 id: changelog
 title: Changelog
 ---
+
+## 0.9.3
+**Date:** 2021-11-16
+* Updated to new Cloudflare workers types package, allowing for stricter typing of `response.webSocket` field.
+* Added workaround to support Miniflare (and the underlying `undici` library) out of the box.
+
 ## 0.9.2
 **Date:** 2021-10-04
 * Added `Context.response.overwrite` which allows you to overwrite the Response built up so far.

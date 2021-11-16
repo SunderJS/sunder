@@ -1,9 +1,9 @@
 <img width="517" alt="Sunder Logo" src="https://user-images.githubusercontent.com/1039510/141460738-b9d5a5dc-f819-41fb-828c-00e578079d71.png">
 
-[![CI](https://github.com/gzuidhof/Sunder/workflows/CI/badge.svg)](https://github.com/gzuidhof/Sunder/actions)
+[![CI](https://github.com/gzuidhof/Sunder/workflows/CI/badge.svg)](https://github.com/sunderjs/Sunder/actions)
 [![License](https://img.shields.io/github/license/sunderjs/sunder)](./LICENSE)
 [![NPM badge](https://img.shields.io/npm/v/sunder)](https://www.npmjs.com/package/sunder)
-[![Documentation](https://img.shields.io/badge/Read%20the-documentation-1abc9c.svg)](https://gzuidhof.github.io/Sunder/docs)
+[![Documentation](https://img.shields.io/badge/Read%20the-documentation-1abc9c.svg)](https://sunderjs.com/docs)
 
 Sunder allows you to quickly build websites and APIs in a modern async structure on [Cloudflare Workers](https://workers.cloudflare.com). Think of Sunder as Express or Koa for serverless. 
 

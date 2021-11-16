@@ -20,6 +20,7 @@ export function proxyRequest(request: Request): Request & HeadersShorthands {
   let _has = (name: string) => request.headers.has(name);
 
   return new Proxy(request, {
+
     get(target, property, receiver) {
       if (property === "arrayBuffer") {
         if (_arrayBuffer !== undefined) {

@@ -2,6 +2,9 @@
 id: changelog
 title: Changelog
 ---
+## 0.9.4
+**Date:** 2021-11-17
+* Added `"type": "module"` to the package.json
 
 ## 0.9.3
 **Date:** 2021-11-16

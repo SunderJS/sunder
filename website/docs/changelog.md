@@ -2,6 +2,10 @@
 id: changelog
 title: Changelog
 ---
+## 0.9.5
+**Date:** 2021-11-25
+* Undo the workaround introduced in 0.9.3 for Miniflare support - it is no longer needed.
+
 ## 0.9.4
 **Date:** 2021-11-17
 * Added `"type": "module"` to the package.json

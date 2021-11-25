@@ -8,7 +8,7 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'gzuidhof', // Usually your GitHub org/user name.
+  organizationName: 'sunderjs', // Usually your GitHub org/user name.
   projectName: 'Sunder', // Usually your repo name.
   themeConfig: {
     navbar: {

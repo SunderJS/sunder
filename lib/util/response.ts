@@ -129,23 +129,13 @@ export class ResponseData implements ResponseInit, HeadersShorthands {
 
 
   /**
-   * Create a native Response object, which is what FetchEvent expects.
+   * Create a native Response object, which is what FetchEvent expectst
    */
   createResponse() {
     const { body: rawBody, status, statusText, headers, webSocket } = this;
-    const body = this._stringifyBody ? JSON.stringify(rawBody) : (rawBody as BodyInit);
-    const init: ResponseInit = {
-      headers, webSocket
-    }
-    // These next 6 lines are technically not necessary, but due to a bug in undici
-    // we will need it for now. undici is used by Miniflare. See issue https://github.com/nodejs/undici/issues/1094
-    if (status !== undefined) {
-      init.status = status;
-    }
-    if (statusText !== undefined) {
-      init.statusText = statusText;
-    }
-
-    return new Response(body, init);
+    const body = this._stringifyBody ? JSON.stringify(rawBody) : rawBody as Exclude<ExtendedBodyInit, number | boolean | object>;
+    return new Response(body, {
+      headers, webSocket, status, statusText
+    });
   }
 }

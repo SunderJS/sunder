@@ -2,6 +2,10 @@
 id: changelog
 title: Changelog
 ---
+## 0.10.0
+**Date:** 2021-11-25
+* Upgrade `http-error`s package to major version 2.0.0 which also upgrades a transitive dependency which used `eval`.
+
 ## 0.9.5
 **Date:** 2021-11-25
 * Undo the workaround introduced in 0.9.3 for Miniflare support - it is no longer needed.

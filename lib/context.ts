@@ -1,5 +1,5 @@
 import { proxyRequest } from "./util/request";
-import { HttpStatus as HTTP } from "./status";
+import { HttpStatus } from "./status";
 import { assert } from "./util/assert";
 import { createHttpError } from "./util/error";
 import { ResponseData } from "./util/response";
@@ -95,7 +95,7 @@ export class Context<EnvironmentType = Record<string, any>, ParamsType = {}, Con
    */
 
   public throw(
-    statusOrError: HTTP | string | Error,
+    statusOrError: HttpStatus | string | Error,
     message?: string | Error,
     props?: object,
   ) {

@@ -8,6 +8,7 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
+  trailingSlash: true,
   organizationName: 'sunderjs', // Usually your GitHub org/user name.
   projectName: 'Sunder', // Usually your repo name.
   themeConfig: {

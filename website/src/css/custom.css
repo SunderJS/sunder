@@ -24,6 +24,6 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-.buttons_src-pages- .button:not(:hover) {
+.buttons_src-pages-styles-module .button:not(:hover) {
   color: white !important;
 }

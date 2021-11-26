@@ -14,7 +14,7 @@ Sunder is
 * Easy to test
 * Typesafe
 
-**The easiest way to get started with Sunder on Cloudflare Workers is to use the [template project](https://github.com/gzuidhof/sunder-worker-template).**
+**The easiest way to get started with Sunder on Cloudflare Workers is to use the [template project](https://github.com/sunderjs/sunder-worker-template).**
 
 ## Installation
 ```bash

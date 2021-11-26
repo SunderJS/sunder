@@ -1,6 +1,6 @@
 ---
 id: context
-title: Context
+title: 🛠 Context
 ---
 
 A Sunder `Context` encapsulates a FetchEvent's `Request` object and is used to construct a `Response`.

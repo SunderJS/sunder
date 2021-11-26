@@ -1,6 +1,6 @@
 ---
 id: application
-title: Application
+title: 🔥 Application
 ---
 
 A Sunder application is an object containing an array of middleware functions which are composed and executed in a stack-like manner upon request. 

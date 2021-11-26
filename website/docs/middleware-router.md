@@ -1,6 +1,6 @@
 ---
 id: middleware-router
-title: Router
+title: 🚦 Router
 ---
 
 A router helps you call different middleware based on the method and the URL of the request. Sunder ships with a default router that will work for most small to medium size applications.

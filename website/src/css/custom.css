@@ -7,7 +7,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #159a6e;
+  --ifm-color-primary: #2c2b2b;
   /* --ifm-color-primary-dark: #ae71ee;
   --ifm-color-primary-darker:#9353d8;
   --ifm-color-primary-darkest: #7232b6;
@@ -22,4 +22,8 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+.buttons_src-pages- .button:not(:hover) {
+  color: white !important;
 }

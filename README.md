@@ -1,4 +1,5 @@
-<img width="517" alt="Sunder Logo" src="https://user-images.githubusercontent.com/1039510/141460738-b9d5a5dc-f819-41fb-828c-00e578079d71.png">
+🌄 Sunder
+---
 
 [![CI](https://github.com/gzuidhof/Sunder/workflows/CI/badge.svg)](https://github.com/sunderjs/Sunder/actions)
 [![License](https://img.shields.io/github/license/sunderjs/sunder)](./LICENSE)
@@ -36,44 +37,6 @@ const router = new Router();
 router.get("/hello/:username", ({response, params}) => {
     response.body = `Hello ${params.username}`;
 });
-
-// Example middleware
-app.use(async (ctx, next) => {
-    const start = Date.now();
-    await next();
-
-    const ms = Date.now() - start;
-    ctx.response.set('X-Response-Time', `${ms}ms`);    
-});
-app.use(router.middleware);
-
-addEventListener('fetch', (event) => {
-  const fe = event as FetchEvent; // Only required in Typescript
-  fe.respondWith(app.handle(fe));
-});
-```
-
-## Modules example
-
-```typescript
-import {Sunder, Router, Context} from "sunder";
-
-const app = new Sunder();
-const router = new Router();
-
-// Example route with a named parameter
-router.get("/hello/:username", ({response, params}) => {
-    response.body = `Hello ${params.username}`;
-});
-
-// Example middleware
-app.use(async (ctx, next) => {
-    const start = Date.now();
-    await next();
-
-    const ms = Date.now() - start;
-    ctx.response.set('X-Response-Time', `${ms}ms`);    
-});
 app.use(router.middleware);
 
 export default {
@@ -93,4 +56,4 @@ The Sunder framework was inspired by Elixir's [plug](https://github.com/elixir-p
 Sunder is only a few hundred lines of code. It has little magic and doesn't impose too much structure.
 
 ## License
-MIT
+[MIT](./LICENSE)

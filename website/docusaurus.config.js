@@ -1,7 +1,7 @@
-const githubUrl = `https://github.com/gzuidhof/sunder`;
+const githubUrl = `https://github.com/sunderjs/sunder`;
 
 module.exports = {
-  title: 'Sunder',
+  title: '🌄 Sunder',
   tagline: 'A minimal and unopinionated framework for Service Workers',
   url: 'https://sunderjs.com',
   baseUrl: '/',
@@ -12,7 +12,7 @@ module.exports = {
   projectName: 'Sunder', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: '<Sunder>',
+      title: '🌄 Sunder',
       // logo: {
       //   alt: 'My Site Logo',
       //   src: 'img/logo.svg',
@@ -42,10 +42,6 @@ module.exports = {
               label: 'Documentation',
               to: 'docs/',
             },
-            // {
-            //   label: 'Second Doc',
-            //   to: 'docs/doc2/',
-            // },
           ],
         },
         {

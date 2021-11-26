@@ -1,15 +1,15 @@
 ---
 id: middleware-introduction
-title: Introduction to Middleware
-sidebar_label: Introduction
+title: 👋 Introduction to Middleware
+sidebar_label: 👋 Introduction
 ---
-
-Sunder ships with some middleware, it is up to you to *compose* them. For any non-trivial app you should use the [`Router`](/docs/middleware-router) middleware.
 
 A middleware is a function that takes a context, and a function that will apply the next middleware. It is a good idea to use the `async` keyword for these functions so you can use `await`.
 
+Sunder ships with some middleware, it is up to you to *compose* them. For any non-trivial app you should use the [`Router`](/docs/middleware-router) middleware.
+
 ### Example one: Middleware that logs all requests
-```javascript
+```typescript
 // Note that in Cloudflare Workers this will always log 0ms as Date.now() always
 // returns the time of the request instead of the wall clock time.
 async function logRequestsMiddleware(ctx, next: Middleware) {
@@ -22,7 +22,7 @@ async function logRequestsMiddleware(ctx, next: Middleware) {
 
 ### Example two: Middleware that prints all errors to console
 
-```javascript
+```typescript
 async function logErrorsMiddleware(ctx, next: Middleware) {
   try {
     await next();

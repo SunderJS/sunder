@@ -1,6 +1,6 @@
 ---
 id: changelog
-title: Changelog
+title: 🚧 Changelog
 ---
 ## 0.10.0
 **Date:** 2021-11-25

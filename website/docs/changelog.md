@@ -3,7 +3,7 @@ id: changelog
 title: 🚧 Changelog
 ---
 
-# Unreleased
+# 0.10.1
 
 **Date:** 2021-12-22..
 

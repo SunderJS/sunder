@@ -40,24 +40,33 @@ export type RouteHandlerMatch<S extends string> = {
   matches?: RegExpExecArray;
 } & Route<Handler<PathParams<S>>>;
 
-/** Split type `"one/two/three"` into `["one", "two", "three"]` */
+/** Split type `"one/:two/:three?/:four"` into `["one", ":two", ":three?", ":four"]` */
 type SplitPath<S extends string> =
     string extends S ? string[] :
     S extends `${infer A}/${infer B}` ? [A, ...SplitPath<B>] :
     [S];
 
-/** Convert type `"one" | ":two" | ":three"` into `"two" | "three"` */
-type ExtractParams<S extends string> =
+/** Convert type `"one" | ":two" | ":three?" | ":four"` into `"two" | "four"` */
+type ExtractRequiredParams<S extends string> =
     string extends S ? string :
+    S extends `:${infer A}?` ? never :
     S extends `:${infer A}` ? A :
     never;
 
+/** Convert type `"one" | ":two" | ":three?" | ":four"` into `"three"` */
+type ExtractOptionalParams<S extends string> =
+    string extends S ? string :
+    S extends `:${infer A}?` ? A :
+    never;
+
 /** 
- * Convert a route path string literal type such as "one/:two/:three" 
- * into a params interface like `{ two: string; three: string }`
+ * Convert a route path string literal type such as "one/:two/:three?/:four" 
+ * into a params interface like `{ two: string; three?: string; four: string }`
  */
-export type PathParams<S extends string> = {
-    [P in ExtractParams<SplitPath<S>[number]>]: string;
+ export type PathParams<S extends string> = {
+  [P in ExtractRequiredParams<SplitPath<S>[number]>]: string;
+} & {
+  [P in ExtractOptionalParams<SplitPath<S>[number]>]?: string;
 };
 
 /**
